@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nova Solar — Light for West Nile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --sun: #F5A623; --sun-deep: #C47B10;
+    --earth: #2C5F2E; --earth-mid: #4A8C3F; --earth-light: #EAF3DE;
+    --sky: #1A4A7A; --sky-mid: #2D6FAF; --sky-light: #E6F1FB;
+    --sand: #F7F2E8; --charcoal: #1C1C1C; --mid: #5C5C5C;
+    --light: #F4F0E8; --white: #FFFFFF;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; font-size: 17px; line-height: 1.7; color: var(--charcoal); background: var(--white); overflow-x: hidden; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.97); border-bottom: 1px solid rgba(0,0,0,0.08); display: flex; align-items: center; justify-content: space-between; padding: 0 5%; height: 68px; }
+  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--charcoal); }
+  .nav-logo-text { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 600; letter-spacing: -0.5px; }
+  .nav-logo-text span { color: var(--sun); }
+  .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--mid); font-size: 15px; font-weight: 400; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--charcoal); }
+  .nav-cta { background: var(--earth); color: var(--white) !important; padding: 10px 22px; border-radius: 100px; font-weight: 500 !important; transition: background 0.2s !important; }
+  .nav-cta:hover { background: var(--earth-mid) !important; }
+
+  /* HERO */
+  .hero { min-height: 100vh; background: var(--sky); position: relative; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; background: linear-gradient(160deg, #0D2A47 0%, #1A4A7A 45%, #2C5F2E 100%); }
+  .hero-sun { position: absolute; top: 18%; right: 12%; width: 260px; height: 260px; border-radius: 50%; background: radial-gradient(circle at 40% 40%, #FFD36E, #F5A623 60%, #C47B10); opacity: 0.9; animation: pulse 4s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { transform: scale(1); opacity: 0.9; } 50% { transform: scale(1.04); opacity: 1; } }
+  .hero-rays { position: absolute; top: 18%; right: 12%; width: 260px; height: 260px; border-radius: 50%; box-shadow: 0 0 80px 40px rgba(245,166,35,0.25), 0 0 160px 80px rgba(245,166,35,0.1); }
+  .hero-landscape { position: absolute; bottom: 0; left: 0; right: 0; height: 38%; }
+  .hero-landscape svg { width: 100%; height: 100%; }
+  .hero-content { position: relative; z-index: 10; padding: 0 8% 11% 8%; max-width: 680px; }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; color: rgba(255,255,255,0.7); font-size: 13px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 20px; }
+  .hero-eyebrow::before { content: ''; display: inline-block; width: 24px; height: 1px; background: var(--sun); }
+  .hero h1 { font-family: 'Fraunces', serif; font-size: clamp(46px, 7vw, 82px); font-weight: 300; line-height: 1.05; color: var(--white); letter-spacing: -1.5px; margin-bottom: 28px; }
+  .hero h1 em { font-style: italic; color: var(--sun); }
+  .hero-sub { font-size: 18px; color: rgba(255,255,255,0.75); font-weight: 300; max-width: 500px; margin-bottom: 44px; line-height: 1.6; }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  /* BUTTONS */
+  .btn-primary { background: var(--sun); color: var(--charcoal); padding: 14px 32px; border-radius: 100px; text-decoration: none; font-weight: 500; font-size: 16px; transition: background 0.2s, transform 0.2s; display: inline-block; cursor: pointer; border: none; }
+  .btn-primary:hover { background: #FFB93D; transform: translateY(-1px); }
+  .btn-outline { border: 1.5px solid rgba(255,255,255,0.45); color: var(--white); padding: 14px 32px; border-radius: 100px; text-decoration: none; font-weight: 400; font-size: 16px; transition: border-color 0.2s, background 0.2s; display: inline-block; }
+  .btn-outline:hover { border-color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.08); }
+  .btn-dark { background: var(--charcoal); color: var(--white); padding: 16px 40px; border-radius: 100px; text-decoration: none; font-weight: 500; font-size: 16px; transition: background 0.2s, transform 0.2s; display: inline-block; cursor: pointer; border: none; }
+  .btn-dark:hover { background: #333; transform: translateY(-1px); }
+  .btn-white { background: var(--white); color: var(--charcoal); padding: 16px 40px; border-radius: 100px; text-decoration: none; font-weight: 400; font-size: 16px; transition: opacity 0.2s; display: inline-block; }
+  .btn-white:hover { opacity: 0.85; }
+  .link-arrow { display: inline-flex; align-items: center; gap: 6px; color: var(--earth); font-size: 14px; font-weight: 500; text-decoration: none; letter-spacing: 0.03em; cursor: pointer; background: none; border: none; }
+  .link-arrow::after { content: '→'; }
+  .link-arrow:hover { color: var(--earth-mid); }
+
+  /* STATS BAND */
+  .stats-band { background: var(--charcoal); color: var(--white); padding: 52px 8%; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 40px; }
+  .stat-item { text-align: center; }
+  .stat-number { font-family: 'Fraunces', serif; font-size: 48px; font-weight: 600; color: var(--sun); letter-spacing: -1px; line-height: 1; margin-bottom: 8px; }
+  .stat-label { font-size: 14px; color: rgba(255,255,255,0.6); font-weight: 300; letter-spacing: 0.03em; line-height: 1.4; }
+
+  /* SECTIONS */
+  section { padding: 96px 8%; }
+  .section-eyebrow { font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--earth); margin-bottom: 16px; }
+  h2 { font-family: 'Fraunces', serif; font-size: clamp(34px, 4vw, 54px); font-weight: 300; line-height: 1.1; letter-spacing: -0.8px; color: var(--charcoal); margin-bottom: 24px; }
+  h2 em { font-style: italic; color: var(--earth); }
+  .section-lead { font-size: 18px; color: var(--mid); font-weight: 300; max-width: 640px; line-height: 1.65; margin-bottom: 56px; }
+
+  /* ABOUT */
+  .welcome { background: var(--sand); }
+  .welcome-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .welcome-img-block { width: 100%; aspect-ratio: 4/5; background: var(--earth-light); border-radius: 4px; overflow: hidden; position: relative; }
+  .welcome-tag { position: absolute; bottom: -20px; right: -20px; background: var(--sun); color: var(--charcoal); border-radius: 50%; width: 130px; height: 130px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; font-family: 'Fraunces', serif; box-shadow: 0 4px 24px rgba(0,0,0,0.12); }
+  .welcome-tag-num { font-size: 36px; font-weight: 600; line-height: 1; }
+  .welcome-tag-txt { font-size: 12px; font-weight: 300; margin-top: 4px; padding: 0 10px; line-height: 1.2; }
+  .welcome-visual { position: relative; }
+  .welcome-text p { font-size: 17px; color: var(--mid); font-weight: 300; line-height: 1.7; margin-bottom: 20px; }
+  .check-list { list-style: none; margin: 32px 0 40px; }
+  .check-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 16px; color: var(--charcoal); margin-bottom: 14px; line-height: 1.5; }
+  .check-list li::before { content: ''; display: inline-block; width: 20px; height: 20px; min-width: 20px; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='10' cy='10' r='10' fill='%234A8C3F'/%3E%3Cpath d='M6 10l3 3 5-5' stroke='white' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-size: cover; margin-top: 3px; }
+
+  /* PROBLEM */
+  .problem { background: var(--white); }
+  .problem-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 16px; }
+  .problem-card { border: 1px solid rgba(0,0,0,0.08); border-radius: 4px; padding: 40px; }
+  .problem-card h3 { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 600; margin-bottom: 14px; color: var(--charcoal); line-height: 1.25; }
+  .problem-card p { font-size: 16px; color: var(--mid); font-weight: 300; line-height: 1.7; }
+  .problem-icon { width: 48px; height: 48px; border-radius: 4px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; }
+  .problem-icon.orange { background: #FEF3E2; } .problem-icon.blue { background: var(--sky-light); } .problem-icon.red { background: #FCEBEB; } .problem-icon.green { background: var(--earth-light); }
+  .problem-icon svg { width: 24px; height: 24px; }
+
+  /* HOW IT WORKS */
+  .how { background: var(--charcoal); color: var(--white); }
+  .how .section-eyebrow { color: var(--sun); }
+  .how h2 { color: var(--white); }
+  .how h2 em { color: var(--sun); }
+  .how .section-lead { color: rgba(255,255,255,0.6); }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.07); border-radius: 4px; overflow: hidden; }
+  .step { padding: 44px 36px; background: var(--charcoal); position: relative; }
+  .step-num { font-family: 'Fraunces', serif; font-size: 64px; font-weight: 300; color: rgba(255,255,255,0.06); line-height: 1; position: absolute; top: 24px; right: 28px; letter-spacing: -2px; }
+  .step-tag { display: inline-block; background: rgba(245,166,35,0.15); color: var(--sun); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 12px; border-radius: 100px; margin-bottom: 20px; }
+  .step h3 { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 600; color: var(--white); margin-bottom: 12px; line-height: 1.2; }
+  .step p { font-size: 15px; color: rgba(255,255,255,0.55); font-weight: 300; line-height: 1.65; }
+
+  /* IMPACT */
+  .impact { background: var(--earth); color: var(--white); }
+  .impact .section-eyebrow { color: rgba(255,255,255,0.6); }
+  .impact h2 { color: var(--white); }
+  .impact h2 em { color: var(--sun); }
+  .impact .section-lead { color: rgba(255,255,255,0.6); }
+  .impact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2px; background: rgba(0,0,0,0.2); border-radius: 4px; overflow: hidden; margin-top: 8px; }
+  .impact-card { background: rgba(255,255,255,0.06); padding: 40px 32px; transition: background 0.2s; }
+  .impact-card:hover { background: rgba(255,255,255,0.1); }
+  .impact-big { font-family: 'Fraunces', serif; font-size: 52px; font-weight: 600; color: var(--sun); letter-spacing: -1px; line-height: 1; margin-bottom: 8px; }
+  .impact-card h4 { font-size: 17px; font-weight: 500; color: var(--white); margin-bottom: 10px; }
+  .impact-card p { font-size: 14px; color: rgba(255,255,255,0.55); font-weight: 300; line-height: 1.6; }
+
+  /* STORY BAND */
+  .story-band { background: var(--sky-light); padding: 80px 8%; display: flex; align-items: center; gap: 80px; }
+  .story-quote { flex: 1; }
+  .story-quote blockquote { font-family: 'Fraunces', serif; font-size: clamp(20px, 2.5vw, 32px); font-weight: 300; font-style: italic; color: var(--sky); line-height: 1.35; padding-left: 28px; border-left: 3px solid var(--sun); }
+  .story-quote cite { display: block; margin-top: 20px; font-family: 'DM Sans', sans-serif; font-style: normal; font-size: 14px; color: var(--mid); padding-left: 28px; }
+  .story-aside { width: 300px; flex-shrink: 0; }
+  .story-aside-box { background: var(--white); border-radius: 4px; padding: 32px; border: 1px solid rgba(0,0,0,0.07); }
+  .story-aside-box h4 { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 600; margin-bottom: 12px; }
+  .story-aside-box p { font-size: 15px; color: var(--mid); font-weight: 300; margin-bottom: 20px; line-height: 1.6; }
+
+  /* VOLUNTEER */
+  .volunteer { background: var(--white); }
+  .vol-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin-top: 16px; }
+  .vol-card { border: 1px solid rgba(0,0,0,0.08); border-radius: 4px; padding: 36px 32px; transition: transform 0.2s, box-shadow 0.2s; }
+  .vol-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+  .vol-card-icon { width: 52px; height: 52px; border-radius: 4px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; font-size: 26px; }
+  .vol-card h3 { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 600; margin-bottom: 10px; }
+  .vol-card p { font-size: 15px; color: var(--mid); font-weight: 300; line-height: 1.65; margin-bottom: 24px; }
+
+  /* DONATE CTA */
+  .donate-cta { background: var(--sun); padding: 100px 8%; }
+  .donate-cta-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .donate-text h2 { color: var(--charcoal); margin-bottom: 20px; }
+  .donate-text h2 em { color: var(--sky); }
+  .donate-text p { font-size: 17px; color: rgba(0,0,0,0.6); font-weight: 300; margin-bottom: 32px; line-height: 1.65; }
+  .donate-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  /* GoFundMe placeholder widget */
+  .gofundme-box { background: var(--white); border-radius: 8px; padding: 40px; box-shadow: 0 8px 40px rgba(0,0,0,0.12); }
+  .gofundme-box h3 { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 600; margin-bottom: 8px; color: var(--charcoal); }
+  .gofundme-box .gfm-sub { font-size: 14px; color: var(--mid); margin-bottom: 28px; font-weight: 300; }
+  .progress-bar-bg { background: #eee; border-radius: 100px; height: 10px; margin-bottom: 12px; overflow: hidden; }
+  .progress-bar-fill { background: linear-gradient(90deg, var(--earth), var(--earth-mid)); height: 100%; border-radius: 100px; width: 0%; transition: width 1.2s ease; }
+  .gfm-amounts { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 24px; }
+  .gfm-raised { font-weight: 600; color: var(--earth); font-size: 22px; font-family: 'Fraunces', serif; }
+  .gfm-goal { color: var(--mid); font-weight: 300; }
+  .gfm-donors { font-size: 13px; color: var(--mid); margin-bottom: 28px; font-weight: 300; }
+  .gfm-btn { display: block; width: 100%; text-align: center; background: #02A95C; color: white; padding: 14px; border-radius: 6px; font-weight: 500; font-size: 16px; text-decoration: none; transition: background 0.2s; border: none; cursor: pointer; }
+  .gfm-btn:hover { background: #028c4d; }
+  .gfm-note { font-size: 12px; color: var(--mid); text-align: center; margin-top: 12px; font-weight: 300; }
+
+  /* PARTNERS */
+  .partners { background: var(--light); padding: 64px 8%; text-align: center; }
+  .partners p { font-size: 13px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mid); margin-bottom: 32px; }
+  .partners-row { display: flex; flex-wrap: wrap; gap: 12px 40px; justify-content: center; align-items: center; }
+  .partner-pill { font-family: 'Fraunces', serif; font-size: 16px; font-weight: 600; color: var(--mid); opacity: 0.65; transition: opacity 0.2s; }
+  .partner-pill:hover { opacity: 1; }
+
+  /* FOOTER */
+  footer { background: var(--charcoal); color: var(--white); padding: 80px 8% 40px; }
+  .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1.2fr; gap: 60px; margin-bottom: 60px; }
+  .footer-brand p { font-size: 15px; color: rgba(255,255,255,0.45); font-weight: 300; line-height: 1.7; max-width: 260px; margin-top: 16px; }
+  .footer-col h5 { font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 20px; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 12px; }
+  .footer-col ul a, .footer-col ul span { color: rgba(255,255,255,0.65); text-decoration: none; font-size: 15px; font-weight: 300; transition: color 0.2s; display: block; }
+  .footer-col ul a:hover { color: var(--white); }
+  /* Team box */
+  .team-box { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09); border-radius: 6px; padding: 28px; }
+  .team-box h5 { font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 18px; }
+  .team-names { display: flex; flex-direction: column; gap: 10px; }
+  .team-name { display: flex; align-items: center; gap: 10px; font-size: 15px; color: rgba(255,255,255,0.8); font-weight: 300; }
+  .team-name::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--sun); flex-shrink: 0; }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: rgba(255,255,255,0.3); font-weight: 300; }
+  .footer-bottom a { color: rgba(255,255,255,0.4); text-decoration: none; }
+
+  /* MODAL OVERLAY */
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 200; align-items: center; justify-content: center; padding: 20px; }
+  .modal-overlay.open { display: flex; }
+  .modal { background: var(--white); border-radius: 8px; width: 100%; max-width: 560px; max-height: 90vh; overflow-y: auto; padding: 48px; position: relative; }
+  .modal-close { position: absolute; top: 20px; right: 24px; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--mid); line-height: 1; }
+  .modal-close:hover { color: var(--charcoal); }
+  .modal-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--earth); margin-bottom: 10px; }
+  .modal h2 { font-family: 'Fraunces', serif; font-size: 28px; font-weight: 600; margin-bottom: 8px; letter-spacing: -0.5px; color: var(--charcoal); }
+  .modal-sub { font-size: 15px; color: var(--mid); font-weight: 300; margin-bottom: 32px; line-height: 1.6; }
+  .form-group { margin-bottom: 20px; }
+  .form-group label { display: block; font-size: 13px; font-weight: 500; color: var(--charcoal); margin-bottom: 7px; letter-spacing: 0.02em; }
+  .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 12px 16px; border: 1px solid rgba(0,0,0,0.15); border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 15px; color: var(--charcoal); outline: none; transition: border-color 0.2s; background: var(--white); }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--earth); }
+  .form-group textarea { resize: vertical; min-height: 110px; }
+  .form-submit { width: 100%; padding: 14px; background: var(--earth); color: var(--white); border: none; border-radius: 100px; font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 500; cursor: pointer; transition: background 0.2s, transform 0.2s; margin-top: 8px; }
+  .form-submit:hover { background: var(--earth-mid); transform: translateY(-1px); }
+  .form-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+  .form-success { display: none; text-align: center; padding: 20px 0; }
+  .form-success-icon { font-size: 48px; margin-bottom: 16px; }
+  .form-success h3 { font-family: 'Fraunces', serif; font-size: 24px; font-weight: 600; margin-bottom: 10px; color: var(--charcoal); }
+  .form-success p { font-size: 15px; color: var(--mid); font-weight: 300; line-height: 1.6; }
+  .form-error-msg { background: #FCEBEB; color: #A32D2D; border-radius: 6px; padding: 12px 16px; font-size: 14px; margin-bottom: 16px; display: none; }
+
+  /* ANIMATIONS */
+  .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-up.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 960px) {
+    .welcome-grid, .problem-cols, .footer-top, .donate-cta-inner { grid-template-columns: 1fr; gap: 40px; }
+    .steps { grid-template-columns: 1fr; }
+    .story-band { flex-direction: column; gap: 40px; }
+    .story-aside { width: 100%; }
+    nav .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+      <circle cx="18" cy="16" r="7" fill="#F5A623"/>
+      <line x1="18" y1="4" x2="18" y2="7" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/>
+      <line x1="18" y1="25" x2="18" y2="28" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/>
+      <line x1="6" y1="16" x2="9" y2="16" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/>
+      <line x1="27" y1="16" x2="30" y2="16" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/>
+      <line x1="10" y1="8" x2="12.1" y2="10.1" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/>
+      <line x1="23.9" y1="21.9" x2="26" y2="24" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/>
+      <line x1="26" y1="8" x2="23.9" y2="10.1" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/>
+      <line x1="12.1" y1="21.9" x2="10" y2="24" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/>
+      <rect x="4" y="28" width="28" height="6" rx="2" fill="#2C5F2E"/>
+    </svg>
+    <span class="nav-logo-text">Nova <span>Solar</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#problem">The Issue</a></li>
+    <li><a href="#how-it-works">Our Model</a></li>
+    <li><a href="#impact">Impact</a></li>
+    <li><a href="#volunteer">Get Involved</a></li>
+    <li><a href="#donate" class="nav-cta">Donate</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-sun"></div>
+  <div class="hero-rays"></div>
+  <div class="hero-landscape">
+    <svg viewBox="0 0 1440 260" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 180 Q180 100 360 160 Q540 210 720 150 Q900 95 1080 170 Q1260 230 1440 140 L1440 260 L0 260 Z" fill="#1A3A1C"/>
+      <path d="M0 220 Q240 170 480 200 Q720 230 960 195 Q1200 158 1440 210 L1440 260 L0 260 Z" fill="#2C5F2E"/>
+      <path d="M0 245 Q360 220 720 240 Q1080 255 1440 235 L1440 260 L0 260 Z" fill="#3A7A36"/>
+      <rect x="120" y="198" width="60" height="5" rx="1" fill="rgba(255,255,255,0.15)" transform="rotate(-8,120,200)"/>
+      <rect x="186" y="193" width="60" height="5" rx="1" fill="rgba(255,255,255,0.15)" transform="rotate(-8,186,195)"/>
+      <line x1="150" y1="203" x2="150" y2="220" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+      <line x1="216" y1="198" x2="216" y2="215" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+      <rect x="1200" y="185" width="70" height="5" rx="1" fill="rgba(255,255,255,0.12)" transform="rotate(-10,1200,187)"/>
+      <rect x="1278" y="180" width="70" height="5" rx="1" fill="rgba(255,255,255,0.12)" transform="rotate(-10,1278,182)"/>
+      <line x1="1235" y1="190" x2="1235" y2="210" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+      <line x1="1313" y1="185" x2="1313" y2="205" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+      <polygon points="680,210 720,175 760,210" fill="rgba(0,0,0,0.3)"/>
+      <rect x="692" y="210" width="56" height="25" fill="rgba(0,0,0,0.3)"/>
+    </svg>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">West Nile, Uganda</div>
+    <h1>Bringing <em>solar light</em><br>to off-grid homes</h1>
+    <p class="hero-sub">Nova Solar connects communities through trusted Village Savings networks to deliver affordable, quality solar energy — one household at a time.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="openModal('volunteer')">Become a Volunteer</button>
+      <a href="#about" class="btn-outline">Learn More</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAND -->
+<div class="stats-band">
+  <div class="stat-item fade-up"><div class="stat-number">536K</div><div class="stat-label">off-grid households<br>in West Nile, Uganda</div></div>
+  <div class="stat-item fade-up" style="transition-delay:.1s"><div class="stat-number">$15</div><div class="stat-label">solar kit that replaces<br>months of kerosene cost</div></div>
+  <div class="stat-item fade-up" style="transition-delay:.2s"><div class="stat-number">99%</div><div class="stat-label">repayment rate in<br>VSLA savings groups</div></div>
+  <div class="stat-item fade-up" style="transition-delay:.3s"><div class="stat-number">60%</div><div class="stat-label">government subsidy<br>for certified solar lanterns</div></div>
+</div>
+
+<!-- ABOUT -->
+<section class="welcome" id="about">
+  <div class="welcome-grid">
+    <div class="welcome-visual fade-up">
+      <div class="welcome-img-block">
+        <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="500" fill="#D4EABB"/>
+          <defs><linearGradient id="sky1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#A8D8EA"/><stop offset="100%" stop-color="#D4EABB"/></linearGradient></defs>
+          <rect width="400" height="280" fill="url(#sky1)"/>
+          <circle cx="310" cy="80" r="45" fill="#F5A623" opacity="0.85"/>
+          <circle cx="310" cy="80" r="55" fill="#F5A623" opacity="0.2"/>
+          <polygon points="80,280 200,210 320,280" fill="#5C8A45"/>
+          <polygon points="80,280 200,220 320,280" fill="#4A7536"/>
+          <rect x="120" y="235" width="50" height="32" rx="2" fill="#1A4A7A" opacity="0.8"/>
+          <rect x="177" y="232" width="50" height="32" rx="2" fill="#1A4A7A" opacity="0.8"/>
+          <line x1="145" y1="235" x2="145" y2="267" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+          <line x1="120" y1="251" x2="170" y2="251" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+          <rect x="100" y="280" width="200" height="140" fill="#C8A96A"/>
+          <rect x="175" y="350" width="50" height="70" rx="4" fill="#6B4C13"/>
+          <rect x="120" y="310" width="45" height="35" rx="3" fill="#FFE4A0" opacity="0.9"/>
+          <rect x="235" y="310" width="45" height="35" rx="3" fill="#FFE4A0" opacity="0.9"/>
+          <ellipse cx="142" cy="327" rx="30" ry="20" fill="#F5A623" opacity="0.2"/>
+          <rect x="0" y="420" width="400" height="80" fill="#8B7355"/>
+          <ellipse cx="60" cy="405" rx="14" ry="20" fill="#5C3D1A"/>
+          <circle cx="60" cy="382" r="10" fill="#5C3D1A"/>
+          <ellipse cx="340" cy="408" rx="12" ry="18" fill="#5C3D1A"/>
+          <circle cx="340" cy="386" r="9" fill="#5C3D1A"/>
+          <rect x="185" y="420" width="30" height="4" rx="2" fill="#333"/>
+          <circle cx="200" cy="415" r="8" fill="#F5A623" opacity="0.9"/>
+          <circle cx="200" cy="415" r="12" fill="#F5A623" opacity="0.25"/>
+          <text x="200" y="480" text-anchor="middle" font-family="Georgia" font-size="13" fill="rgba(44,95,46,0.4)" font-style="italic">West Nile, Uganda</text>
+        </svg>
+      </div>
+      <div class="welcome-tag"><div class="welcome-tag-num">100%</div><div class="welcome-tag-txt">direct community impact</div></div>
+    </div>
+    <div class="welcome-text fade-up" style="transition-delay:.15s">
+      <div class="section-eyebrow">Welcome to Nova Solar</div>
+      <h2>Solar energy<br>through <em>community trust</em></h2>
+      <p>Nova Solar is a social venture bringing affordable, quality solar products to off-grid households in Uganda's West Nile region — a geography where existing models have failed and grid electricity remains years away.</p>
+      <p>We work through Village Savings and Loan Associations (VSLAs): trusted community groups where members save together, lend to each other, and now — access clean energy through a distribution model built on relationships, not just transactions.</p>
+      <ul class="check-list">
+        <li>Community-Based Trainers introduce solar products at weekly VSLA meetings</li>
+        <li>Accountable local agents handle sales, inventory, and after-care</li>
+        <li>VSLA loan funds enable purchases for families who can't pay cash upfront</li>
+        <li>All products are VeraSol-certified for quality you can trust</li>
+      </ul>
+      <a href="#how-it-works" class="btn-primary" style="background:var(--earth);color:white;">See How It Works</a>
+    </div>
+  </div>
+</section>
+
+<!-- THE PROBLEM -->
+<section class="problem" id="problem">
+  <div class="section-eyebrow fade-up">The Issue</div>
+  <h2 class="fade-up">Energy poverty in<br><em>West Nile</em></h2>
+  <p class="section-lead fade-up">Over half a million households in northern Uganda have no electricity. They spend $6–15 a month on kerosene — up to 25% of a subsistence family's income — for dim, dangerous light.</p>
+  <div class="problem-cols">
+    <div class="problem-card fade-up">
+      <div class="problem-icon orange"><svg viewBox="0 0 24 24" fill="none" stroke="#C47B10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6M12 18v4M4.93 4.93l4.24 4.24M14.83 14.83l4.24 4.24M2 12h6M18 12h4M4.93 19.07l4.24-4.24M14.83 9.17l4.24-4.24"/></svg></div>
+      <h3>No grid connection in sight</h3>
+      <p>While a transmission line reached Arua town in 2024, last-mile household connection remains years away for most rural families. Kerosene is the only option — a recurring cost that traps families in energy poverty.</p>
+    </div>
+    <div class="problem-card fade-up" style="transition-delay:.1s">
+      <div class="problem-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="#1A4A7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
+      <h3>PAYG solar doesn't reach here</h3>
+      <p>Pay-As-You-Go solar requires mobile money, stable income history, and national ID. Refugee families and the most cash-constrained households are systematically excluded from every existing model.</p>
+    </div>
+    <div class="problem-card fade-up" style="transition-delay:.2s">
+      <div class="problem-icon red"><svg viewBox="0 0 24 24" fill="none" stroke="#A32D2D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <h3>Agent models have failed before</h3>
+      <p>In 2011, GIZ tested freelance solar agents in Arua — and failed. 46 lamps went unrecovered. Not from dishonesty, but from structurally flawed consignment to capital-constrained agents without accountability.</p>
+    </div>
+    <div class="problem-card fade-up" style="transition-delay:.3s">
+      <div class="problem-icon green"><svg viewBox="0 0 24 24" fill="none" stroke="#2C5F2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <h3>Intent exists — fulfillment doesn't</h3>
+      <p>A 2025 randomised study confirmed VSLAs increase solar savings goals by 32 percentage points. But without a trusted, local fulfillment channel, intent alone doesn't become ownership.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how-it-works">
+  <div class="section-eyebrow fade-up">Our Model</div>
+  <h2 class="fade-up">How <em>Nova Solar</em> works</h2>
+  <p class="section-lead fade-up">We combine what previous models kept separate: community trust infrastructure and accountable, local commercial delivery — the first time these two have been united in this region.</p>
+  <div class="steps">
+    <div class="step fade-up"><div class="step-num">01</div><div class="step-tag">Trust Layer</div><h3>Community-Based Trainer</h3><p>A CARE-trained facilitator who has worked with VSLA members for months or years runs an information session at a weekly meeting — demonstrating the product from personal experience, not as a salesperson.</p></div>
+    <div class="step fade-up" style="transition-delay:.1s"><div class="step-num">02</div><div class="step-tag">Commerce Layer</div><h3>Local Commercial Agent</h3><p>A community member — often a VSLA member themselves — purchases inventory upfront (no consignment), handles transactions, and answers questions at every weekly meeting. Social accountability replaces absent legal enforcement.</p></div>
+    <div class="step fade-up" style="transition-delay:.2s"><div class="step-num">03</div><div class="step-tag">Finance Layer</div><h3>VSLA Loan Fund</h3><p>Members who can't pay cash upfront apply for a productive-use loan from their own savings group — no mobile money, no external credit check, no refugee ID barriers. The group's near-100% repayment rate speaks for itself.</p></div>
+  </div>
+  <div style="margin-top:56px;display:flex;gap:12px;flex-wrap:wrap;">
+    <div style="background:rgba(255,255,255,0.07);border-radius:4px;padding:20px 24px;flex:1;min-width:130px;">
+      <div style="font-family:'Fraunces',serif;font-size:28px;color:#F5A623;font-weight:600;">$15</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.55);margin-top:4px;font-weight:300;">Pico Solar Kit · Entry point</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.07);border-radius:4px;padding:20px 24px;flex:1;min-width:130px;">
+      <div style="font-family:'Fraunces',serif;font-size:28px;color:#F5A623;font-weight:600;">$50</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.55);margin-top:4px;font-weight:300;">Mid-tier Kit · 3 lights + phone</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.07);border-radius:4px;padding:20px 24px;flex:1;min-width:130px;">
+      <div style="font-family:'Fraunces',serif;font-size:28px;color:#F5A623;font-weight:600;">$120+</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.55);margin-top:4px;font-weight:300;">Solar Home System · Full household</div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section class="impact" id="impact">
+  <div class="section-eyebrow fade-up">Our Impact Goals</div>
+  <h2 class="fade-up">Changing lives, <em>measurably</em></h2>
+  <p class="section-lead fade-up">Every pilot we run produces publishable findings. Even setbacks become data that advances the field.</p>
+  <div class="impact-grid">
+    <div class="impact-card fade-up"><div class="impact-big">30%+</div><h4>Conversion Rate Target</h4><p>30% or more of households who attend a demonstration session make a purchase within 30 days.</p></div>
+    <div class="impact-card fade-up" style="transition-delay:.1s"><div class="impact-big">75K–125K</div><h4>Reachable Households</h4><p>VSLA-affiliated households in West Nile — a ready network of organised, financially disciplined families.</p></div>
+    <div class="impact-card fade-up" style="transition-delay:.2s"><div class="impact-big">$1–2M</div><h4>Month 60 Revenue Goal</h4><p>Pilot in one sub-county, scale to West Nile, expand to Northern Uganda, replicate across East Africa.</p></div>
+    <div class="impact-card fade-up" style="transition-delay:.3s"><div class="impact-big">60%</div><h4>Subsidy Available Now</h4><p>Uganda's UECCC/EASP program discounts certified solar lanterns by 60% for registered distributors.</p></div>
+  </div>
+</section>
+
+<!-- STORY BAND -->
+<div class="story-band">
+  <div class="story-quote fade-up">
+    <blockquote>"They have explicitly demonstrated willingness to save for solar products when supported by a structured savings mechanism."</blockquote>
+    <cite>— Elven et al., 2025 · Randomised Control Trial, Uganda VSLA Groups</cite>
+  </div>
+  <div class="story-aside fade-up" style="transition-delay:.15s">
+    <div class="story-aside-box">
+      <h4>The 100% Model</h4>
+      <p>Designed from the ground up to operate without ongoing grant dependency. Every dollar you give goes directly to community distribution — not corporate overhead.</p>
+      <a href="#donate" class="btn-primary" style="font-size:15px;padding:12px 28px;background:var(--earth);color:white;">Give Now</a>
+    </div>
+  </div>
+</div>
+
+<!-- VOLUNTEER -->
+<section class="volunteer" id="volunteer">
+  <div class="section-eyebrow fade-up">Get Involved</div>
+  <h2 class="fade-up">Come and be part of<br><em>the change</em></h2>
+  <p class="section-lead fade-up">Whether you're a solar engineer, a community organiser, a researcher, or simply someone who cares — there's a meaningful role for you in Nova Solar.</p>
+  <div class="vol-grid">
+    <div class="vol-card fade-up">
+      <div class="vol-card-icon" style="background:var(--earth-light);">🌱</div>
+      <h3>Field Volunteer</h3>
+      <p>Join our local partner NGOs in West Nile. Help facilitate VSLA information sessions, support community agents, and track pilot outcomes on the ground.</p>
+      <button class="link-arrow" onclick="openModal('volunteer')">Apply to volunteer</button>
+    </div>
+    <div class="vol-card fade-up" style="transition-delay:.1s">
+      <div class="vol-card-icon" style="background:var(--sky-light);">☀️</div>
+      <h3>Technical Expert</h3>
+      <p>Solar engineers, supply chain specialists, and product quality assessors — help us source and certify the best products for our communities.</p>
+      <button class="link-arrow" onclick="openModal('expert')">Share your expertise</button>
+    </div>
+    <div class="vol-card fade-up" style="transition-delay:.2s">
+      <div class="vol-card-icon" style="background:#FEF3E2;">📊</div>
+      <h3>Research Partner</h3>
+      <p>We document everything. Academics, policy researchers, and development practitioners can partner with us to generate rigorous, publishable findings.</p>
+      <button class="link-arrow" onclick="openModal('research')">Partner with us</button>
+    </div>
+    <div class="vol-card fade-up" style="transition-delay:.3s">
+      <div class="vol-card-icon" style="background:#FCEBEB;">❤️</div>
+      <h3>Community Champion</h3>
+      <p>Spread the word, host fundraisers, connect us with your networks. Awareness is its own form of action.</p>
+      <button class="link-arrow" onclick="document.getElementById('donate').scrollIntoView({behavior:'smooth'})">Support our mission</button>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<div class="partners fade-up">
+  <p>Working alongside</p>
+  <div class="partners-row">
+    <span class="partner-pill">CARE Uganda</span>
+    <span class="partner-pill">NURI</span>
+    <span class="partner-pill">Action Against Hunger</span>
+    <span class="partner-pill">AVSI Foundation</span>
+    <span class="partner-pill">PALM Corps</span>
+    <span class="partner-pill">AFARD</span>
+    <span class="partner-pill">CEFORD</span>
+    <span class="partner-pill">UECCC / EASP</span>
+    <span class="partner-pill">Sun King</span>
+    <span class="partner-pill">d.light</span>
+  </div>
+</div>
+
+<!-- DONATE -->
+<section class="donate-cta" id="donate">
+  <div class="donate-cta-inner">
+    <div class="donate-text fade-up">
+      <h2>Give today. Light<br><em>a home tonight</em>.</h2>
+      <p>A $15 pico solar kit pays for itself in two months of kerosene savings. Your contribution funds the distribution infrastructure that gets it into the right hands.</p>
+      <p style="font-size:14px;color:rgba(0,0,0,0.45);font-weight:300;">Nova Solar is a pre-501(c)(3) social venture. Donations are not yet tax-deductible but go directly to community programs.</p>
+      <div class="donate-actions" style="margin-top:28px;">
+        <a href="#gofundme-campaign" class="btn-dark">Donate on GoFundMe</a>
+        <button class="btn-white" onclick="openModal('volunteer')">Volunteer Instead</button>
+      </div>
+    </div>
+    <div class="fade-up" style="transition-delay:.15s">
+      <div class="gofundme-box" id="gofundme-campaign">
+        <h3>Support Nova Solar</h3>
+        <p class="gfm-sub">Help us light up homes in West Nile, Uganda</p>
+        <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill"></div></div>
+        <div class="gfm-amounts">
+          <div><div class="gfm-raised">$2,340</div><div style="font-size:13px;color:var(--mid);font-weight:300;">raised</div></div>
+          <div style="text-align:right"><div class="gfm-goal" style="font-size:18px;font-family:'Fraunces',serif;font-weight:600;color:var(--charcoal);">$10,000</div><div style="font-size:13px;color:var(--mid);font-weight:300;">goal</div></div>
+        </div>
+        <div class="gfm-donors">🌍 &nbsp;38 people have donated</div>
+        <a href="https://www.gofundme.com" target="_blank" class="gfm-btn" id="gfmBtn">Donate Now</a>
+        <p class="gfm-note">⚠️ GoFundMe campaign link coming soon — update the URL above once your campaign is live.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a class="nav-logo" href="#" style="color:white;">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="16" r="7" fill="#F5A623"/><line x1="18" y1="4" x2="18" y2="7" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/><line x1="18" y1="25" x2="18" y2="28" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/><line x1="6" y1="16" x2="9" y2="16" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/><line x1="27" y1="16" x2="30" y2="16" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/><rect x="4" y="28" width="28" height="6" rx="2" fill="#2C5F2E"/></svg>
+        <span class="nav-logo-text" style="color:white;">Nova <span>Solar</span></span>
+      </a>
+      <p>Trust-embedded solar distribution through Village Savings Networks. West Nile Region, Uganda.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Navigation</h5>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#problem">The Issue</a></li>
+        <li><a href="#how-it-works">Our Model</a></li>
+        <li><a href="#impact">Impact</a></li>
+        <li><a href="#volunteer">Get Involved</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="mailto:novasolar@gmail.com">novasolar@gmail.com</a></li>
+        <li><span>San Francisco, CA</span></li>
+        <li style="margin-top:16px;"><a href="#donate" style="color:var(--sun);">Donate →</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="team-box">
+        <h5>Our Team</h5>
+        <div class="team-names">
+          <div class="team-name">Anand</div>
+          <div class="team-name">Ved</div>
+          <div class="team-name">Amitav</div>
+          <div class="team-name">Alexei</div>
+          <div class="team-name">Bhavi</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Nova Solar. All rights reserved.</span>
+    <span>Built on evidence. Powered by community.</span>
+  </div>
+</footer>
+
+<!-- ===== MODALS ===== -->
+
+<!-- Field Volunteer Modal -->
+<div class="modal-overlay" id="modal-volunteer">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('volunteer')">×</button>
+    <div id="form-volunteer-wrap">
+      <div class="modal-eyebrow">Get Involved</div>
+      <h2>Apply to Volunteer</h2>
+      <p class="modal-sub">Join our field teams in West Nile, Uganda. We'll be in touch within a few days.</p>
+      <div class="form-error-msg" id="err-volunteer">Something went wrong. Please try again.</div>
+      <div class="form-group"><label>Full Name</label><input type="text" id="v-name" placeholder="Your name" /></div>
+      <div class="form-group"><label>Email Address</label><input type="email" id="v-email" placeholder="you@example.com" /></div>
+      <div class="form-group"><label>Which region or country are you based in?</label><input type="text" id="v-extra" placeholder="e.g. Nairobi, Kenya · San Francisco, CA" /></div>
+      <div class="form-group"><label>Message <span style="font-weight:300;color:var(--mid)">(optional)</span></label><textarea id="v-message" placeholder="Tell us a bit about your background and why you'd like to volunteer…"></textarea></div>
+      <button class="form-submit" id="v-submit" onclick="submitForm('volunteer')">Send Application</button>
+    </div>
+    <div class="form-success" id="success-volunteer">
+      <div class="form-success-icon">🌱</div>
+      <h3>Application received!</h3>
+      <p>Thanks for reaching out. We'll review your application and get back to you at <strong id="v-confirm-email"></strong> within a few days.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Technical Expert Modal -->
+<div class="modal-overlay" id="modal-expert">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('expert')">×</button>
+    <div id="form-expert-wrap">
+      <div class="modal-eyebrow">Technical Expertise</div>
+      <h2>Share Your Expertise</h2>
+      <p class="modal-sub">Solar engineers, supply chain specialists, and quality assessors — we'd love to hear from you.</p>
+      <div class="form-error-msg" id="err-expert">Something went wrong. Please try again.</div>
+      <div class="form-group"><label>Full Name</label><input type="text" id="e-name" placeholder="Your name" /></div>
+      <div class="form-group"><label>Email Address</label><input type="email" id="e-email" placeholder="you@example.com" /></div>
+      <div class="form-group"><label>What is your area of technical expertise?</label><input type="text" id="e-extra" placeholder="e.g. Solar PV systems, supply chain logistics, product quality" /></div>
+      <div class="form-group"><label>Message <span style="font-weight:300;color:var(--mid)">(optional)</span></label><textarea id="e-message" placeholder="Tell us about your experience and how you'd like to contribute…"></textarea></div>
+      <button class="form-submit" id="e-submit" onclick="submitForm('expert')">Get in Touch</button>
+    </div>
+    <div class="form-success" id="success-expert">
+      <div class="form-success-icon">☀️</div>
+      <h3>Message received!</h3>
+      <p>Thanks for offering your expertise. We'll be in touch at <strong id="e-confirm-email"></strong> shortly.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Research Partner Modal -->
+<div class="modal-overlay" id="modal-research">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('research')">×</button>
+    <div id="form-research-wrap">
+      <div class="modal-eyebrow">Research Partnership</div>
+      <h2>Partner With Us</h2>
+      <p class="modal-sub">We document everything we do. Let's produce rigorous, publishable findings together.</p>
+      <div class="form-error-msg" id="err-research">Something went wrong. Please try again.</div>
+      <div class="form-group"><label>Full Name</label><input type="text" id="r-name" placeholder="Your name" /></div>
+      <div class="form-group"><label>Email Address</label><input type="email" id="r-email" placeholder="you@example.com" /></div>
+      <div class="form-group"><label>What institution or organization are you affiliated with?</label><input type="text" id="r-extra" placeholder="e.g. Stanford University, CGAP, World Bank" /></div>
+      <div class="form-group"><label>Message <span style="font-weight:300;color:var(--mid)">(optional)</span></label><textarea id="r-message" placeholder="Describe your research interests and how a partnership might work…"></textarea></div>
+      <button class="form-submit" id="r-submit" onclick="submitForm('research')">Send Inquiry</button>
+    </div>
+    <div class="form-success" id="success-research">
+      <div class="form-success-icon">📊</div>
+      <h3>Inquiry received!</h3>
+      <p>Excited to explore a partnership. We'll reach out to <strong id="r-confirm-email"></strong> soon.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ─── SUPABASE CONFIG ────────────────────────────────────────────────────────
+  // TODO: Replace these placeholders with your actual Supabase credentials
+  const SUPABASE_URL = 'YOUR_SUPABASE_PROJECT_URL';   // e.g. https://xxxx.supabase.co
+  const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY'; // eyJ...
+
+  async function insertToSupabase(payload) {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/contact_submissions`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) throw new Error(`Supabase error: ${res.status}`);
+  }
+
+  // ─── FORM LOGIC ─────────────────────────────────────────────────────────────
+  const formConfig = {
+    volunteer: { prefix: 'v', roleType: 'volunteer' },
+    expert:    { prefix: 'e', roleType: 'expert' },
+    research:  { prefix: 'r', roleType: 'research' }
+  };
+
+  async function submitForm(type) {
+    const { prefix, roleType } = formConfig[type];
+    const name    = document.getElementById(`${prefix}-name`).value.trim();
+    const email   = document.getElementById(`${prefix}-email`).value.trim();
+    const extra   = document.getElementById(`${prefix}-extra`).value.trim();
+    const message = document.getElementById(`${prefix}-message`).value.trim();
+    const errEl   = document.getElementById(`err-${type}`);
+    const btnEl   = document.getElementById(`${prefix}-submit`);
+
+    errEl.style.display = 'none';
+
+    if (!name || !email) {
+      errEl.textContent = 'Please fill in your name and email.';
+      errEl.style.display = 'block';
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errEl.textContent = 'Please enter a valid email address.';
+      errEl.style.display = 'block';
+      return;
+    }
+
+    btnEl.disabled = true;
+    btnEl.textContent = 'Sending…';
+
+    try {
+      await insertToSupabase({ name, email, role_type: roleType, extra_field: extra, message });
+      document.getElementById(`${prefix}-confirm-email`).textContent = email;
+      document.getElementById(`form-${type}-wrap`).style.display = 'none';
+      document.getElementById(`success-${type}`).style.display = 'block';
+    } catch (err) {
+      console.error(err);
+      errEl.textContent = 'Something went wrong. Please email us directly at novasolar@gmail.com';
+      errEl.style.display = 'block';
+      btnEl.disabled = false;
+      btnEl.textContent = btnEl.dataset.label || 'Send';
+    }
+  }
+
+  // ─── MODAL HELPERS ──────────────────────────────────────────────────────────
+  function openModal(type) {
+    document.getElementById(`modal-${type}`).classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(type) {
+    document.getElementById(`modal-${type}`).classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  // Close on backdrop click
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) {
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+  });
+
+  // ─── GOFUNDME PROGRESS BAR ──────────────────────────────────────────────────
+  setTimeout(() => {
+    document.getElementById('progressFill').style.width = '23.4%';
+  }, 600);
+
+  // ─── SCROLL ANIMATIONS ──────────────────────────────────────────────────────
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
