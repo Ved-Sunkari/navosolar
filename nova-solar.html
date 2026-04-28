@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nova Solar — Light for West Nile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --sun: #F5A623;
+    --sun-deep: #C47B10;
+    --earth: #2C5F2E;
+    --earth-mid: #4A8C3F;
+    --earth-light: #EAF3DE;
+    --sky: #1A4A7A;
+    --sky-mid: #2D6FAF;
+    --sky-light: #E6F1FB;
+    --sand: #F7F2E8;
+    --charcoal: #1C1C1C;
+    --mid: #5C5C5C;
+    --light: #F4F0E8;
+    --white: #FFFFFF;
+    --accent: #E8521A;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--charcoal);
+    background: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.97);
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+    height: 68px;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--charcoal);
+  }
+  .nav-logo svg { width: 36px; height: 36px; }
+  .nav-logo-text {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+  }
+  .nav-logo-text span { color: var(--sun); }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--mid);
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--charcoal); }
+  .nav-cta {
+    background: var(--earth);
+    color: var(--white) !important;
+    padding: 10px 22px;
+    border-radius: 100px;
+    font-weight: 500 !important;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--earth-mid) !important; color: var(--white) !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: var(--sky);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, #0D2A47 0%, #1A4A7A 45%, #2C5F2E 100%);
+  }
+  .hero-sun {
+    position: absolute;
+    top: 18%;
+    right: 12%;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 40%, #FFD36E, #F5A623 60%, #C47B10);
+    opacity: 0.9;
+    animation: pulse 4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.04); opacity: 1; }
+  }
+  .hero-rays {
+    position: absolute;
+    top: 18%;
+    right: 12%;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: transparent;
+    box-shadow: 0 0 80px 40px rgba(245,166,35,0.25), 0 0 160px 80px rgba(245,166,35,0.1);
+  }
+  .hero-landscape {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 38%;
+  }
+  .hero-landscape svg { width: 100%; height: 100%; }
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    padding: 0 8% 11% 8%;
+    max-width: 680px;
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.7);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--sun);
+  }
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(46px, 7vw, 82px);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--white);
+    letter-spacing: -1.5px;
+    margin-bottom: 28px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--sun);
+  }
+  .hero-sub {
+    font-size: 18px;
+    color: rgba(255,255,255,0.75);
+    font-weight: 300;
+    max-width: 500px;
+    margin-bottom: 44px;
+    line-height: 1.6;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: var(--sun);
+    color: var(--charcoal);
+    padding: 14px 32px;
+    border-radius: 100px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+    transition: background 0.2s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: #FFB93D; transform: translateY(-1px); }
+  .btn-outline {
+    border: 1.5px solid rgba(255,255,255,0.45);
+    color: var(--white);
+    padding: 14px 32px;
+    border-radius: 100px;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 16px;
+    transition: border-color 0.2s, background 0.2s;
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.08); }
+
+  /* STATS BAND */
+  .stats-band {
+    background: var(--charcoal);
+    color: var(--white);
+    padding: 52px 8%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 40px;
+  }
+  .stat-item { text-align: center; }
+  .stat-number {
+    font-family: 'Fraunces', serif;
+    font-size: 48px;
+    font-weight: 600;
+    color: var(--sun);
+    letter-spacing: -1px;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .stat-label {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    font-weight: 300;
+    letter-spacing: 0.03em;
+    line-height: 1.4;
+  }
+
+  /* SECTIONS */
+  section { padding: 96px 8%; }
+
+  .section-eyebrow {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--earth);
+    margin-bottom: 16px;
+  }
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(34px, 4vw, 54px);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.8px;
+    color: var(--charcoal);
+    margin-bottom: 24px;
+  }
+  h2 em { font-style: italic; color: var(--earth); }
+  .section-lead {
+    font-size: 18px;
+    color: var(--mid);
+    font-weight: 300;
+    max-width: 640px;
+    line-height: 1.65;
+    margin-bottom: 56px;
+  }
+
+  /* WELCOME / ABOUT */
+  .welcome {
+    background: var(--sand);
+  }
+  .welcome-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .welcome-visual {
+    position: relative;
+  }
+  .welcome-img-block {
+    width: 100%;
+    aspect-ratio: 4/5;
+    background: var(--earth-light);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+  }
+  .welcome-img-block svg { width: 100%; height: 100%; }
+  .welcome-tag {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    background: var(--sun);
+    color: var(--charcoal);
+    border-radius: 50%;
+    width: 130px;
+    height: 130px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: 'Fraunces', serif;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  }
+  .welcome-tag-num {
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 1;
+  }
+  .welcome-tag-txt {
+    font-size: 12px;
+    font-weight: 300;
+    margin-top: 4px;
+    padding: 0 10px;
+    line-height: 1.2;
+  }
+  .welcome-text h2 { margin-bottom: 16px; }
+  .welcome-text p {
+    font-size: 17px;
+    color: var(--mid);
+    font-weight: 300;
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+  .check-list {
+    list-style: none;
+    margin: 32px 0 40px;
+  }
+  .check-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 16px;
+    color: var(--charcoal);
+    font-weight: 400;
+    margin-bottom: 14px;
+    line-height: 1.5;
+  }
+  .check-list li::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    background: var(--earth-light);
+    border-radius: 50%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='10' cy='10' r='10' fill='%234A8C3F'/%3E%3Cpath d='M6 10l3 3 5-5' stroke='white' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-size: cover;
+    margin-top: 3px;
+  }
+
+  /* THE PROBLEM */
+  .problem {
+    background: var(--white);
+  }
+  .problem-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    margin-top: 16px;
+  }
+  .problem-card {
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 4px;
+    padding: 40px;
+  }
+  .problem-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 14px;
+    color: var(--charcoal);
+    line-height: 1.25;
+  }
+  .problem-card p {
+    font-size: 16px;
+    color: var(--mid);
+    font-weight: 300;
+    line-height: 1.7;
+  }
+  .problem-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .problem-icon.orange { background: #FEF3E2; }
+  .problem-icon.blue { background: var(--sky-light); }
+  .problem-icon.red { background: #FCEBEB; }
+  .problem-icon.green { background: var(--earth-light); }
+  .problem-icon svg { width: 24px; height: 24px; }
+
+  /* HOW IT WORKS */
+  .how {
+    background: var(--charcoal);
+    color: var(--white);
+  }
+  .how .section-eyebrow { color: var(--sun); }
+  .how h2 { color: var(--white); }
+  .how h2 em { color: var(--sun); }
+  .how .section-lead { color: rgba(255,255,255,0.6); }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .step {
+    padding: 44px 36px;
+    background: var(--charcoal);
+    position: relative;
+  }
+  .step-num {
+    font-family: 'Fraunces', serif;
+    font-size: 64px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.06);
+    line-height: 1;
+    position: absolute;
+    top: 24px;
+    right: 28px;
+    letter-spacing: -2px;
+  }
+  .step-tag {
+    display: inline-block;
+    background: rgba(245,166,35,0.15);
+    color: var(--sun);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 100px;
+    margin-bottom: 20px;
+  }
+  .step h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+  .step p {
+    font-size: 15px;
+    color: rgba(255,255,255,0.55);
+    font-weight: 300;
+    line-height: 1.65;
+  }
+
+  /* IMPACT */
+  .impact {
+    background: var(--earth);
+    color: var(--white);
+    padding-top: 96px;
+    padding-bottom: 96px;
+  }
+  .impact .section-eyebrow { color: rgba(255,255,255,0.6); }
+  .impact h2 { color: var(--white); }
+  .impact h2 em { color: var(--sun); }
+  .impact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 8px;
+  }
+  .impact-card {
+    background: rgba(255,255,255,0.06);
+    padding: 40px 32px;
+    transition: background 0.2s;
+  }
+  .impact-card:hover { background: rgba(255,255,255,0.1); }
+  .impact-big {
+    font-family: 'Fraunces', serif;
+    font-size: 52px;
+    font-weight: 600;
+    color: var(--sun);
+    letter-spacing: -1px;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .impact-card h4 {
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 10px;
+  }
+  .impact-card p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.55);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* STORIES / CTA BAND */
+  .story-band {
+    background: var(--sky-light);
+    padding: 80px 8%;
+    display: flex;
+    align-items: center;
+    gap: 80px;
+  }
+  .story-quote {
+    flex: 1;
+  }
+  .story-quote blockquote {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(22px, 2.5vw, 34px);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--sky);
+    line-height: 1.35;
+    letter-spacing: -0.3px;
+    position: relative;
+    padding-left: 28px;
+    border-left: 3px solid var(--sun);
+  }
+  .story-quote cite {
+    display: block;
+    margin-top: 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal;
+    font-size: 14px;
+    color: var(--mid);
+    letter-spacing: 0.05em;
+    padding-left: 28px;
+  }
+  .story-aside {
+    width: 300px;
+    flex-shrink: 0;
+  }
+  .story-aside-box {
+    background: var(--white);
+    border-radius: 4px;
+    padding: 32px;
+    border: 1px solid rgba(0,0,0,0.07);
+  }
+  .story-aside-box h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--charcoal);
+  }
+  .story-aside-box p {
+    font-size: 15px;
+    color: var(--mid);
+    font-weight: 300;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+
+  /* VOLUNTEER / GET INVOLVED */
+  .volunteer {
+    background: var(--white);
+  }
+  .vol-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    margin-top: 16px;
+  }
+  .vol-card {
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 4px;
+    padding: 36px 32px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .vol-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+  .vol-card-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+  }
+  .vol-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--charcoal);
+  }
+  .vol-card p {
+    font-size: 15px;
+    color: var(--mid);
+    font-weight: 300;
+    line-height: 1.65;
+    margin-bottom: 24px;
+  }
+  .link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--earth);
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    letter-spacing: 0.03em;
+  }
+  .link-arrow::after { content: '→'; }
+  .link-arrow:hover { color: var(--earth-mid); }
+
+  /* DONATE CTA */
+  .donate-cta {
+    background: var(--sun);
+    padding: 100px 8%;
+    text-align: center;
+  }
+  .donate-cta h2 {
+    color: var(--charcoal);
+    margin-bottom: 20px;
+    letter-spacing: -1px;
+  }
+  .donate-cta h2 em { color: var(--sky); }
+  .donate-cta p {
+    font-size: 18px;
+    color: rgba(0,0,0,0.6);
+    font-weight: 300;
+    max-width: 580px;
+    margin: 0 auto 44px;
+    line-height: 1.65;
+  }
+  .donate-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn-dark {
+    background: var(--charcoal);
+    color: var(--white);
+    padding: 16px 40px;
+    border-radius: 100px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+    transition: background 0.2s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-dark:hover { background: #333; transform: translateY(-1px); }
+  .btn-white {
+    background: var(--white);
+    color: var(--charcoal);
+    padding: 16px 40px;
+    border-radius: 100px;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 16px;
+    transition: opacity 0.2s;
+    display: inline-block;
+  }
+  .btn-white:hover { opacity: 0.85; }
+
+  /* PARTNERS */
+  .partners {
+    background: var(--light);
+    padding: 64px 8%;
+    text-align: center;
+  }
+  .partners p {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 32px;
+  }
+  .partners-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 40px;
+    justify-content: center;
+    align-items: center;
+  }
+  .partner-pill {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--mid);
+    opacity: 0.65;
+    letter-spacing: -0.2px;
+    transition: opacity 0.2s;
+  }
+  .partner-pill:hover { opacity: 1; }
+
+  /* FOOTER */
+  footer {
+    background: var(--charcoal);
+    color: var(--white);
+    padding: 80px 8% 40px;
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 80px;
+    margin-bottom: 60px;
+  }
+  .footer-brand .nav-logo { margin-bottom: 20px; color: var(--white); }
+  .footer-brand p {
+    font-size: 15px;
+    color: rgba(255,255,255,0.45);
+    font-weight: 300;
+    line-height: 1.7;
+    max-width: 280px;
+  }
+  .footer-col h5 {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 20px;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 12px; }
+  .footer-col ul a {
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 300;
+    transition: color 0.2s;
+  }
+  .footer-col ul a:hover { color: var(--white); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: rgba(255,255,255,0.3);
+    font-weight: 300;
+  }
+  .footer-bottom a { color: rgba(255,255,255,0.4); text-decoration: none; }
+  .footer-bottom a:hover { color: rgba(255,255,255,0.7); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .welcome-grid, .problem-cols, .footer-top { grid-template-columns: 1fr; gap: 40px; }
+    .steps { grid-template-columns: 1fr; }
+    .story-band { flex-direction: column; gap: 40px; }
+    .story-aside { width: 100%; }
+    .welcome-tag { right: 10px; }
+    nav .nav-links { display: none; }
+  }
+
+  /* SCROLL ANIMATIONS */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: none;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="18" cy="16" r="7" fill="#F5A623"/>
+      <line x1="18" y1="4" x2="18" y2="7" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/>
+      <line x1="18" y1="25" x2="18" y2="28" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/>
+      <line x1="6" y1="16" x2="9" y2="16" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/>
+      <line x1="27" y1="16" x2="30" y2="16" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/>
+      <line x1="10" y1="8" x2="12.1" y2="10.1" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/>
+      <line x1="23.9" y1="21.9" x2="26" y2="24" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/>
+      <line x1="26" y1="8" x2="23.9" y2="10.1" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/>
+      <line x1="12.1" y1="21.9" x2="10" y2="24" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/>
+      <rect x="4" y="28" width="28" height="6" rx="2" fill="#2C5F2E"/>
+    </svg>
+    <span class="nav-logo-text">Nova <span>Solar</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#problem">The Issue</a></li>
+    <li><a href="#how-it-works">Our Model</a></li>
+    <li><a href="#impact">Impact</a></li>
+    <li><a href="#volunteer">Get Involved</a></li>
+    <li><a href="#donate" class="nav-cta">Donate</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-sun"></div>
+  <div class="hero-rays"></div>
+  <div class="hero-landscape">
+    <svg viewBox="0 0 1440 260" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 180 Q180 100 360 160 Q540 210 720 150 Q900 95 1080 170 Q1260 230 1440 140 L1440 260 L0 260 Z" fill="#1A3A1C"/>
+      <path d="M0 220 Q240 170 480 200 Q720 230 960 195 Q1200 158 1440 210 L1440 260 L0 260 Z" fill="#2C5F2E"/>
+      <path d="M0 245 Q360 220 720 240 Q1080 255 1440 235 L1440 260 L0 260 Z" fill="#3A7A36"/>
+      <!-- solar panels silhouette -->
+      <rect x="120" y="198" width="60" height="5" rx="1" fill="rgba(255,255,255,0.15)" transform="rotate(-8, 120, 200)"/>
+      <rect x="186" y="193" width="60" height="5" rx="1" fill="rgba(255,255,255,0.15)" transform="rotate(-8, 186, 195)"/>
+      <line x1="150" y1="203" x2="150" y2="220" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+      <line x1="216" y1="198" x2="216" y2="215" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+      <rect x="1200" y="185" width="70" height="5" rx="1" fill="rgba(255,255,255,0.12)" transform="rotate(-10, 1200, 187)"/>
+      <rect x="1278" y="180" width="70" height="5" rx="1" fill="rgba(255,255,255,0.12)" transform="rotate(-10, 1278, 182)"/>
+      <line x1="1235" y1="190" x2="1235" y2="210" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+      <line x1="1313" y1="185" x2="1313" y2="205" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+      <!-- hut shapes -->
+      <polygon points="680,210 720,175 760,210" fill="rgba(0,0,0,0.3)"/>
+      <rect x="692" y="210" width="56" height="25" fill="rgba(0,0,0,0.3)"/>
+      <polygon points="740,216 760,200 780,216" fill="rgba(0,0,0,0.25)"/>
+    </svg>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">West Nile, Uganda</div>
+    <h1>Bringing <em>solar light</em><br>to off-grid homes</h1>
+    <p class="hero-sub">Nova Solar connects communities through trusted Village Savings networks to deliver affordable, quality solar energy — one household at a time.</p>
+    <div class="hero-actions">
+      <a href="#volunteer" class="btn-primary">Become a Volunteer</a>
+      <a href="#about" class="btn-outline">Learn More</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAND -->
+<div class="stats-band">
+  <div class="stat-item fade-up">
+    <div class="stat-number">536K</div>
+    <div class="stat-label">off-grid households<br>in West Nile, Uganda</div>
+  </div>
+  <div class="stat-item fade-up" style="transition-delay:0.1s">
+    <div class="stat-number">$15</div>
+    <div class="stat-label">solar kit that replaces<br>months of kerosene cost</div>
+  </div>
+  <div class="stat-item fade-up" style="transition-delay:0.2s">
+    <div class="stat-number">99%</div>
+    <div class="stat-label">repayment rate in<br>VSLA savings groups</div>
+  </div>
+  <div class="stat-item fade-up" style="transition-delay:0.3s">
+    <div class="stat-number">60%</div>
+    <div class="stat-label">government subsidy<br>for certified solar lanterns</div>
+  </div>
+</div>
+
+<!-- ABOUT / WELCOME -->
+<section class="welcome" id="about">
+  <div class="welcome-grid">
+    <div class="welcome-visual fade-up">
+      <div class="welcome-img-block">
+        <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+          <!-- abstract community scene -->
+          <rect width="400" height="500" fill="#D4EABB"/>
+          <!-- sky gradient -->
+          <defs>
+            <linearGradient id="sky1" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#A8D8EA"/>
+              <stop offset="100%" stop-color="#D4EABB"/>
+            </linearGradient>
+          </defs>
+          <rect width="400" height="280" fill="url(#sky1)"/>
+          <!-- sun -->
+          <circle cx="310" cy="80" r="45" fill="#F5A623" opacity="0.85"/>
+          <circle cx="310" cy="80" r="55" fill="#F5A623" opacity="0.2"/>
+          <!-- solar panels on roof -->
+          <polygon points="80,280 200,210 320,280" fill="#5C8A45"/>
+          <polygon points="80,280 200,220 320,280" fill="#4A7536"/>
+          <rect x="120" y="235" width="50" height="32" rx="2" fill="#1A4A7A" opacity="0.8"/>
+          <rect x="177" y="232" width="50" height="32" rx="2" fill="#1A4A7A" opacity="0.8"/>
+          <line x1="145" y1="235" x2="145" y2="267" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+          <line x1="120" y1="251" x2="170" y2="251" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+          <line x1="202" y1="251" x2="227" y2="251" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+          <!-- hut body -->
+          <rect x="100" y="280" width="200" height="140" fill="#C8A96A"/>
+          <rect x="100" y="280" width="200" height="140" fill="#8B6914" opacity="0.25"/>
+          <!-- door -->
+          <rect x="175" y="350" width="50" height="70" rx="4" fill="#6B4C13"/>
+          <!-- window with light -->
+          <rect x="120" y="310" width="45" height="35" rx="3" fill="#FFE4A0" opacity="0.9"/>
+          <rect x="235" y="310" width="45" height="35" rx="3" fill="#FFE4A0" opacity="0.9"/>
+          <!-- light glow from window -->
+          <ellipse cx="142" cy="327" rx="30" ry="20" fill="#F5A623" opacity="0.2"/>
+          <!-- ground -->
+          <rect x="0" y="420" width="400" height="80" fill="#8B7355"/>
+          <!-- people silhouettes -->
+          <ellipse cx="60" cy="405" rx="14" ry="20" fill="#5C3D1A"/>
+          <circle cx="60" cy="382" r="10" fill="#5C3D1A"/>
+          <ellipse cx="340" cy="408" rx="12" ry="18" fill="#5C3D1A"/>
+          <circle cx="340" cy="386" r="9" fill="#5C3D1A"/>
+          <!-- solar lamp on ground -->
+          <rect x="185" y="420" width="30" height="4" rx="2" fill="#333"/>
+          <circle cx="200" cy="415" r="8" fill="#F5A623" opacity="0.9"/>
+          <circle cx="200" cy="415" r="12" fill="#F5A623" opacity="0.25"/>
+          <!-- Nova Solar text watermark -->
+          <text x="200" y="480" text-anchor="middle" font-family="Georgia" font-size="13" fill="rgba(44,95,46,0.4)" font-style="italic">West Nile, Uganda</text>
+        </svg>
+      </div>
+      <div class="welcome-tag">
+        <div class="welcome-tag-num">100%</div>
+        <div class="welcome-tag-txt">direct community impact</div>
+      </div>
+    </div>
+    <div class="welcome-text fade-up" style="transition-delay:0.15s">
+      <div class="section-eyebrow">Welcome to Nova Solar</div>
+      <h2>Solar energy<br>through <em>community trust</em></h2>
+      <p>Nova Solar is a social venture bringing affordable, quality solar products to off-grid households in Uganda's West Nile region — a geography where existing models have failed and grid electricity remains years away for most families.</p>
+      <p>We work through Village Savings and Loan Associations (VSLAs): trusted community groups where members save together, lend to each other, and now — access clean energy through a distribution model built on relationships, not just transactions.</p>
+      <ul class="check-list">
+        <li>Community-Based Trainers introduce solar products in weekly VSLA meetings</li>
+        <li>Accountable local agents handle sales, inventory, and after-care</li>
+        <li>VSLA loan funds enable purchases for families who can't pay cash upfront</li>
+        <li>Products are VeraSol-certified for quality you can trust</li>
+      </ul>
+      <a href="#how-it-works" class="btn-primary" style="background: var(--earth); color: white;">See How It Works</a>
+    </div>
+  </div>
+</section>
+
+<!-- THE PROBLEM -->
+<section class="problem" id="problem">
+  <div class="section-eyebrow fade-up">The Issue</div>
+  <h2 class="fade-up">Energy poverty in<br><em>West Nile</em></h2>
+  <p class="section-lead fade-up">Over half a million households in northern Uganda have no electricity. They spend $6–15 a month on kerosene — up to 25% of a subsistence family's income — for dim, dangerous light.</p>
+  <div class="problem-cols">
+    <div class="problem-card fade-up">
+      <div class="problem-icon orange">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#C47B10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2v6M12 18v4M4.93 4.93l4.24 4.24M14.83 14.83l4.24 4.24M2 12h6M18 12h4M4.93 19.07l4.24-4.24M14.83 9.17l4.24-4.24"/>
+        </svg>
+      </div>
+      <h3>No grid connection in sight</h3>
+      <p>While a transmission line reached Arua town in 2024, last-mile household connection remains years away for most rural families. Kerosene is the only option — a recurring cost that traps families in energy poverty.</p>
+    </div>
+    <div class="problem-card fade-up" style="transition-delay:0.1s">
+      <div class="problem-icon blue">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#1A4A7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="5" width="20" height="14" rx="2"/>
+          <line x1="2" y1="10" x2="22" y2="10"/>
+        </svg>
+      </div>
+      <h3>PAYG solar doesn't reach here</h3>
+      <p>Pay-As-You-Go solar — the dominant model in Uganda — requires mobile money, stable income history, and national ID. Refugee families and the most cash-constrained households are systematically excluded.</p>
+    </div>
+    <div class="problem-card fade-up" style="transition-delay:0.2s">
+      <div class="problem-icon red">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#A32D2D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="8" x2="12" y2="12"/>
+          <line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+      </div>
+      <h3>Agent models have failed before</h3>
+      <p>In 2011, GIZ tested freelance solar agents in Arua — and failed. 46 lamps went unrecovered. Not from dishonesty, but from structurally flawed consignment to capital-constrained agents without community accountability.</p>
+    </div>
+    <div class="problem-card fade-up" style="transition-delay:0.3s">
+      <div class="problem-icon green">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#2C5F2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+      </div>
+      <h3>Intent exists — fulfillment doesn't</h3>
+      <p>A 2025 randomised study confirmed VSLAs are powerful for building purchase intent — increasing solar savings goals by 32 percentage points. But without a trusted, local fulfillment channel, intent alone doesn't become ownership.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how-it-works">
+  <div class="section-eyebrow fade-up">Our Model</div>
+  <h2 class="fade-up">How <em>Nova Solar</em> works</h2>
+  <p class="section-lead fade-up">We combine what previous models kept separate: community trust infrastructure and accountable, local commercial delivery — the first time these two have been united in this region.</p>
+  <div class="steps">
+    <div class="step fade-up">
+      <div class="step-num">01</div>
+      <div class="step-tag">Trust Layer</div>
+      <h3>Community-Based Trainer</h3>
+      <p>A CARE-trained facilitator who has worked with VSLA members for months or years runs an information session at a weekly meeting — demonstrating the product from personal experience, not as a salesperson.</p>
+    </div>
+    <div class="step fade-up" style="transition-delay:0.1s">
+      <div class="step-num">02</div>
+      <div class="step-tag">Commerce Layer</div>
+      <h3>Local Commercial Agent</h3>
+      <p>A community member — often a VSLA member themselves — purchases inventory upfront (no consignment), handles transactions, and answers questions at every weekly meeting. Social accountability replaces absent legal enforcement.</p>
+    </div>
+    <div class="step fade-up" style="transition-delay:0.2s">
+      <div class="step-num">03</div>
+      <div class="step-tag">Finance Layer</div>
+      <h3>VSLA Loan Fund</h3>
+      <p>Members who can't pay cash upfront can apply for a productive-use loan from their own savings group — no mobile money, no external credit check, no refugee ID barriers. The group's near-100% repayment rate speaks for itself.</p>
+    </div>
+  </div>
+  <div style="margin-top: 56px; display: flex; gap: 40px; flex-wrap: wrap;">
+    <div style="flex: 1; min-width: 220px;">
+      <div style="font-size: 13px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 14px;">Product Ladder</div>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <div style="background: rgba(255,255,255,0.07); border-radius: 4px; padding: 16px 20px; flex: 1; min-width: 120px;">
+          <div style="font-family: 'Fraunces', serif; font-size: 24px; color: #F5A623; font-weight: 600;">$15</div>
+          <div style="font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 4px; font-weight: 300;">Pico Solar Kit<br>Entry point</div>
+        </div>
+        <div style="background: rgba(255,255,255,0.07); border-radius: 4px; padding: 16px 20px; flex: 1; min-width: 120px;">
+          <div style="font-family: 'Fraunces', serif; font-size: 24px; color: #F5A623; font-weight: 600;">$50</div>
+          <div style="font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 4px; font-weight: 300;">Mid-tier Kit<br>3 lights + phone</div>
+        </div>
+        <div style="background: rgba(255,255,255,0.07); border-radius: 4px; padding: 16px 20px; flex: 1; min-width: 120px;">
+          <div style="font-family: 'Fraunces', serif; font-size: 24px; color: #F5A623; font-weight: 600;">$120+</div>
+          <div style="font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 4px; font-weight: 300;">Solar Home System<br>Full household</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section class="impact" id="impact">
+  <div class="section-eyebrow fade-up">Our Impact Goals</div>
+  <h2 class="fade-up">Changing lives, <em>measurably</em></h2>
+  <p class="section-lead fade-up" style="color: rgba(255,255,255,0.6);">Every pilot we run produces publishable findings. Even setbacks become data that advances the field. Here's what we're working toward.</p>
+  <div class="impact-grid">
+    <div class="impact-card fade-up">
+      <div class="impact-big">30%+</div>
+      <h4>Conversion Rate Target</h4>
+      <p>Our pilot success criterion: 30% or more of households who attend a demonstration session make a purchase within 30 days.</p>
+    </div>
+    <div class="impact-card fade-up" style="transition-delay:0.1s">
+      <div class="impact-big">75K–125K</div>
+      <h4>Reachable Households</h4>
+      <p>VSLA-affiliated households in West Nile alone — a ready network of organised, financially disciplined families.</p>
+    </div>
+    <div class="impact-card fade-up" style="transition-delay:0.2s">
+      <div class="impact-big">$1–2M</div>
+      <h4>Month 60 Revenue Goal</h4>
+      <p>Our 5-year roadmap: pilot in one sub-county, scale to West Nile, expand to Northern Uganda, and replicate across East Africa.</p>
+    </div>
+    <div class="impact-card fade-up" style="transition-delay:0.3s">
+      <div class="impact-big">60%</div>
+      <h4>Subsidy Available Now</h4>
+      <p>Uganda's UECCC/EASP program (launched November 2024) discounts certified solar lanterns by 60% for registered distributors — dramatically expanding affordability.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STORY BAND -->
+<div class="story-band">
+  <div class="story-quote fade-up">
+    <blockquote>
+      "They are currently spending a disproportionate share of income on kerosene and have explicitly demonstrated willingness to save for solar products when supported by a structured savings mechanism."
+    </blockquote>
+    <cite>— Elven et al., 2025 · Randomised Control Trial, Uganda VSLA Groups</cite>
+  </div>
+  <div class="story-aside fade-up" style="transition-delay:0.15s">
+    <div class="story-aside-box">
+      <h4>The 100% Model</h4>
+      <p>We are designed from the ground up to operate without ongoing grant dependency. Every dollar you give goes directly to community distribution — not corporate overhead.</p>
+      <a href="#donate" class="btn-primary" style="font-size: 15px; padding: 12px 28px;">Give Now</a>
+    </div>
+  </div>
+</div>
+
+<!-- VOLUNTEER -->
+<section class="volunteer" id="volunteer">
+  <div class="section-eyebrow fade-up">Get Involved</div>
+  <h2 class="fade-up">Come and be part of<br><em>the change</em></h2>
+  <p class="section-lead fade-up">Whether you're a solar engineer, a community organiser, a researcher, or simply someone who cares — there's a meaningful role for you in Nova Solar.</p>
+  <div class="vol-grid">
+    <div class="vol-card fade-up">
+      <div class="vol-card-icon" style="background: var(--earth-light);">🌱</div>
+      <h3>Field Volunteer</h3>
+      <p>Join our local partner NGOs in West Nile. Help facilitate VSLA information sessions, support community agents, and track pilot outcomes on the ground.</p>
+      <a href="mailto:volunteer@novasolar.org" class="link-arrow">Apply to volunteer</a>
+    </div>
+    <div class="vol-card fade-up" style="transition-delay:0.1s">
+      <div class="vol-card-icon" style="background: var(--sky-light);">☀️</div>
+      <h3>Technical Expert</h3>
+      <p>Solar engineers, supply chain specialists, and product quality assessors — help us source and certify the best products for our communities.</p>
+      <a href="mailto:tech@novasolar.org" class="link-arrow">Share your expertise</a>
+    </div>
+    <div class="vol-card fade-up" style="transition-delay:0.2s">
+      <div class="vol-card-icon" style="background: #FEF3E2;">📊</div>
+      <h3>Research Partner</h3>
+      <p>We document everything. Academics, policy researchers, and development practitioners can partner with us to generate rigorous, publishable findings from every pilot.</p>
+      <a href="mailto:research@novasolar.org" class="link-arrow">Partner with us</a>
+    </div>
+    <div class="vol-card fade-up" style="transition-delay:0.3s">
+      <div class="vol-card-icon" style="background: #FCEBEB;">❤️</div>
+      <h3>Community Champion</h3>
+      <p>Spread the word, host fundraisers, connect us with your networks. You don't have to be in Uganda to make a difference — awareness is its own form of action.</p>
+      <a href="#" class="link-arrow">Start championing</a>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<div class="partners fade-up">
+  <p>Working alongside</p>
+  <div class="partners-row">
+    <span class="partner-pill">CARE Uganda</span>
+    <span class="partner-pill">NURI</span>
+    <span class="partner-pill">Action Against Hunger</span>
+    <span class="partner-pill">AVSI Foundation</span>
+    <span class="partner-pill">PALM Corps</span>
+    <span class="partner-pill">AFARD</span>
+    <span class="partner-pill">CEFORD</span>
+    <span class="partner-pill">UECCC / EASP</span>
+    <span class="partner-pill">Sun King</span>
+    <span class="partner-pill">d.light</span>
+  </div>
+</div>
+
+<!-- DONATE CTA -->
+<section class="donate-cta" id="donate">
+  <h2 class="fade-up">Give today. Light<br><em>a home tonight</em>.</h2>
+  <p class="fade-up">A $15 pico solar kit pays for itself in two months of kerosene savings. Your contribution funds the distribution infrastructure that gets it into the right hands.</p>
+  <div class="donate-actions fade-up">
+    <a href="#" class="btn-dark">Donate Now</a>
+    <a href="#volunteer" class="btn-white">Volunteer Instead</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a class="nav-logo" href="#">
+        <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="18" cy="16" r="7" fill="#F5A623"/>
+          <line x1="18" y1="4" x2="18" y2="7" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/>
+          <line x1="18" y1="25" x2="18" y2="28" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/>
+          <line x1="6" y1="16" x2="9" y2="16" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/>
+          <line x1="27" y1="16" x2="30" y2="16" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/>
+          <rect x="4" y="28" width="28" height="6" rx="2" fill="#2C5F2E"/>
+        </svg>
+        <span class="nav-logo-text" style="color:white;">Nova <span>Solar</span></span>
+      </a>
+      <p>Trust-embedded solar distribution through Village Savings Networks. West Nile Region, Uganda.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Navigation</h5>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#problem">The Issue</a></li>
+        <li><a href="#how-it-works">Our Model</a></li>
+        <li><a href="#impact">Impact</a></li>
+        <li><a href="#volunteer">Get Involved</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="mailto:hello@novasolar.org">hello@novasolar.org</a></li>
+        <li><a href="mailto:volunteer@novasolar.org">volunteer@novasolar.org</a></li>
+        <li><a href="mailto:research@novasolar.org">research@novasolar.org</a></li>
+        <li><a href="#">Arua, Uganda</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Nova Solar. All rights reserved.</span>
+    <span>Built on evidence. Powered by community.</span>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
