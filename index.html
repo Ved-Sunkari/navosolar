@@ -182,6 +182,18 @@
   .team-names { display: flex; flex-direction: column; gap: 10px; }
   .team-name { display: flex; align-items: center; gap: 10px; font-size: 15px; color: rgba(255,255,255,0.8); font-weight: 300; }
   .team-name::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--sun); flex-shrink: 0; }
+  .team-name a {
+   color: rgba(255,255,255,0.8); /* match your text */
+   text-decoration: none;
+ }
+ 
+ .team-name a:visited {
+   color: rgba(255,255,255,0.8); /* prevent purple after click */
+ }
+ 
+ .team-name a:hover {
+   color: white; /* optional: brighter on hover */
+ }
   .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: rgba(255,255,255,0.3); font-weight: 300; }
   .footer-bottom a { color: rgba(255,255,255,0.4); text-decoration: none; }
 
