@@ -265,6 +265,33 @@
   .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: rgba(255,255,255,0.3); font-weight: 300; }
   .footer-bottom a { color: rgba(255,255,255,0.4); text-decoration: none; }
 
+ .footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--white);
+}
+
+.footer-logo .nav-logo-img {
+  height: 40px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.footer-logo-text {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  color: var(--white);
+}
+
+.footer-logo-text span {
+  color: var(--sun);
+}
+
   /* MODAL OVERLAY */
   .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 200; align-items: center; justify-content: center; padding: 20px; }
   .modal-overlay.open { display: flex; }
@@ -551,11 +578,10 @@
 <footer>
   <div class="footer-top">
     <div class="footer-brand">
-      <a class="nav-logo" href="#" style="color:white;">
-       <img src="navo-logo.png" alt="Navo Solar" class="footer-logo-img" />
-       
-        <span class="nav-logo-text" style="color:white;">Navo <span>Solar</span></span>
-      </a>
+     <div class="footer-logo">
+  <img src="images/navo-logo.svg" alt="Navo Solar" class="nav-logo-img" />
+  <span class="footer-logo-text">Navo <span>Solar</span></span>
+</div>
       <p>Trust-embedded solar distribution through Village Savings Networks. West Nile Region, Uganda.</p>
     </div>
     <div class="footer-col">
