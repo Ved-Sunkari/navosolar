@@ -113,25 +113,25 @@
    min-width: 0;
  }
  
- .chart-area {
-   width: 100%;
- }
- 
- .chart-svg {
+.chart-area {
+  position: relative;
   width: 100%;
   height: auto;
-  aspect-ratio: 700 / 190;
-  display: block;
 }
 
-.chart-legend {
-  display: flex;
-  gap: 18px;
-  margin-top: 10px;
-  padding-left: 35px;
-  flex-wrap: wrap;
-  font-size: 12px;
-  color: #6B7280;
+.chart-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+.chart-caption {
+  margin-top: 28px;
+  font-size: 14px;
+  color: var(--mid);
+  font-weight: 300;
+  line-height: 1.65;
 }
  
  .chart-highlight-row .highlight-box {
@@ -396,9 +396,8 @@
   <h2 class="pitch-h2 fade-up">Energy poverty that isn't being solved<br>by the models that <em>exist</em>.</h2>
   <p class="pitch-lead fade-up">The West Nile region — Arua, Yumbe, Adjumani, Obongi, Zombo, Pakwach, and Nebbi — is home to roughly 536,000 off-grid households. While a transmission line reached Arua town in 2024, last-mile rural connection remains years away for the vast majority.</p>
 
- <div class="chart-highlight-row fade-up">
+<div class="chart-highlight-row fade-up">
   <div class="chart-wrap">
-   <div class="chart-wrap fade-up">
     <div class="chart-title">Cumulative Cost: Kerosene vs. Pico Solar Kit (12 months)</div>
     <div class="chart-area">
   <svg class="chart-svg" viewBox="0 0 700 160" preserveAspectRatio="xMidYMid meet">
@@ -434,8 +433,9 @@
  
   </svg>
 </div>
-    <p style="margin-top:16px;font-size:14px;color:var(--mid);font-weight:300;line-height:1.65;">The <span style="color:#E87B4A;font-weight:500;">orange line</span> shows kerosene spend accumulating at $15/month — $180 by year's end. The <span style="color:#2C5F2E;font-weight:500;">green line</span> is the $15 pico solar kit: a single upfront purchase that pays for itself within roughly one month and costs nothing after that. The shaded area between the lines is money saved.</p>
-
+<p class="chart-caption">
+  The <span style="color:#E87B4A;font-weight:500;">orange line</span> shows kerosene spend accumulating at $15/month — $180 by year's end. The <span style="color:#2C5F2E;font-weight:500;">green line</span> is the $15 pico solar kit: a single upfront purchase that pays for itself within roughly one month and costs nothing after that. The shaded area between the lines is money saved.
+</p>
 
     
   </div>
