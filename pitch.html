@@ -136,14 +136,72 @@
   .product-rows li span:last-child { font-weight: 500; color: var(--charcoal); }
   .product-desc { font-size: 14px; color: var(--mid); font-weight: 300; margin-top: 16px; line-height: 1.6; font-style: italic; }
 
-  /* ── 04 MARKET ── */
-  .market-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; background: rgba(0,0,0,0.2); border-radius: 4px; overflow: hidden; }
-  .market-card { background: rgba(255,255,255,0.06); padding: 36px 28px; }
-  .market-card:hover { background: rgba(255,255,255,0.1); }
-  .market-label { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 8px; }
-  .market-acronym { font-family: 'Fraunces', serif; font-size: 42px; font-weight: 600; color: var(--sun); letter-spacing: -1px; line-height: 1; margin-bottom: 12px; }
-  .market-card h3 { font-size: 16px; font-weight: 500; color: var(--white); margin-bottom: 8px; }
-  .market-card p { font-size: 14px; color: rgba(255,255,255,0.5); font-weight: 300; line-height: 1.65; }
+  /* ── 04 MARKET ZOOM ── */
+  .market-zoom { border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; background: rgba(0,0,0,0.25); }
+
+  /* Tab bar */
+  .zoom-tabs { display: flex; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .zoom-tab {
+    flex: 1; background: none; border: none; border-bottom: 2px solid transparent;
+    padding: 16px 12px; cursor: pointer; text-align: center;
+    transition: background 0.2s, border-color 0.2s;
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+  }
+  .zoom-tab:hover { background: rgba(255,255,255,0.05); }
+  .zoom-tab[aria-selected="true"] { border-bottom-color: var(--sun); background: rgba(245,166,35,0.06); }
+  .zoom-tab-label {
+    font-family: 'Fraunces', serif; font-size: 22px; font-weight: 600;
+    color: rgba(255,255,255,0.4); letter-spacing: -0.5px; line-height: 1;
+    transition: color 0.2s;
+  }
+  .zoom-tab[aria-selected="true"] .zoom-tab-label { color: var(--sun); }
+  .zoom-tab-sub { font-size: 11px; font-weight: 400; color: rgba(255,255,255,0.3); letter-spacing: 0.05em; text-transform: uppercase; transition: color 0.2s; }
+  .zoom-tab[aria-selected="true"] .zoom-tab-sub { color: rgba(255,255,255,0.55); }
+
+  /* Body: map + caption side by side */
+  .zoom-body { display: grid; grid-template-columns: 1fr 1fr; min-height: 360px; }
+  .zoom-stage { position: relative; border-right: 1px solid rgba(255,255,255,0.07); background: rgba(0,0,0,0.2); }
+  .zoom-svg { width: 100%; height: 100%; display: block; }
+
+  /* Map paths */
+  .layer-africa { fill: rgba(255,255,255,0.04); stroke: rgba(255,255,255,0.1); stroke-width: 0.5; }
+  .layer-ssa { fill: rgba(44,95,46,0.22); stroke: rgba(44,140,63,0.7); stroke-width: 0.3; transition: fill 0.4s; }
+  .market-zoom[data-view="tam"] .layer-ssa { fill: rgba(245,166,35,0.18); stroke: rgba(245,166,35,0.55); }
+  .market-zoom[data-view="sam"] .layer-ssa { fill: rgba(44,95,46,0.3); stroke: rgba(44,140,63,0.9); }
+  .market-zoom[data-view="som"] .layer-ssa { fill: rgba(44,95,46,0.22); stroke: rgba(44,140,63,0.7); }
+  .layer-westnile { fill: rgba(245,166,35,0.35); stroke: rgba(245,166,35,0.9); stroke-width: 0.15; transition: fill 0.4s; }
+  .market-zoom[data-view="tam"] .layer-westnile { fill: rgba(245,166,35,0.12); stroke: rgba(245,166,35,0.3); }
+  .market-zoom[data-view="sam"] .layer-westnile { fill: rgba(245,166,35,0.5); stroke: rgba(245,166,35,1); }
+  .market-zoom[data-view="som"] .layer-westnile { fill: rgba(245,166,35,0.35); stroke: rgba(245,166,35,0.9); }
+  .ssa-spread circle { fill: rgba(245,166,35,0.55); }
+  .som-dots circle { fill: rgba(44,140,63,0.7); transition: fill 0.4s; }
+  .market-zoom[data-view="som"] .som-dots circle { fill: var(--sun); }
+  .leader { stroke: rgba(255,255,255,0.15); stroke-width: 0.2; stroke-dasharray: 1 0.8; }
+  .marker-ring { fill: none; stroke: var(--sun); stroke-width: 0.4; opacity: 0.6; animation: markerPulse 2.5s ease-in-out infinite; }
+  .marker-dot { fill: var(--sun); }
+  @keyframes markerPulse { 0%,100%{opacity:0.6;r:9} 50%{opacity:0.2;r:13} }
+
+  /* Scale label */
+  .zoom-scale-label { position: absolute; bottom: 12px; left: 12px; font-size: 10px; color: rgba(255,255,255,0.35); font-weight: 300; letter-spacing: 0.04em; }
+  .zoom-scale-label span { display: none; }
+  .market-zoom[data-view="som"] .zoom-scale-label span[data-view="som"],
+  .market-zoom[data-view="sam"] .zoom-scale-label span[data-view="sam"],
+  .market-zoom[data-view="tam"] .zoom-scale-label span[data-view="tam"] { display: inline; }
+
+  /* Captions panel */
+  .zoom-captions { display: flex; flex-direction: column; justify-content: center; padding: 40px 36px; }
+  .zoom-caption { display: none; }
+  .market-zoom[data-view="som"] .zoom-caption[data-view="som"],
+  .market-zoom[data-view="sam"] .zoom-caption[data-view="sam"],
+  .market-zoom[data-view="tam"] .zoom-caption[data-view="tam"] { display: block; }
+  .zoom-caption-label { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 10px; }
+  .zoom-caption-num { font-family: 'Fraunces', serif; font-size: 48px; font-weight: 300; color: var(--sun); letter-spacing: -1.5px; line-height: 1; margin-bottom: 20px; }
+  .zoom-caption p { font-size: 15px; color: rgba(255,255,255,0.55); font-weight: 300; line-height: 1.7; }
+
+  @media (max-width: 900px) {
+    .zoom-body { grid-template-columns: 1fr; }
+    .zoom-stage { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); min-height: 260px; }
+  }
 
   /* Revenue chart */
   .rev-chart { margin-top: 40px; }
@@ -259,7 +317,7 @@
     <li><a href="index.html#how-it-works">Our Model</a></li>
     <li><a href="index.html#impact">Impact</a></li>
     <li><a href="index.html#volunteer">Get Involved</a></li>
-    <li><a href="pitch.html" class="active">Solution</a></li>
+    <li><a href="pitch.html" class="active">Investor Pitch</a></li>
     <li><a href="index.html#donate" class="nav-cta">Donate</a></li>
   </ul>
 </nav>
@@ -468,10 +526,10 @@
   <div class="sec-label fade-up">04 — Market</div>
   <h2 class="pitch-h2 fade-up">From a sub-county pilot to<br>a <em>continental commercial layer</em>.</h2>
   <p class="pitch-lead fade-up">The opportunity scales from West Nile to Northern Uganda to sub-Saharan Africa — and the VSLA infrastructure that makes it work already exists across CARE programme countries.</p>
- 
- 
+
+
   <div class="market-zoom fade-up" data-view="som" id="marketZoom">
- 
+
     <!-- Tab bar: SOM → SAM → TAM (zoom out order matches original) -->
     <div class="zoom-tabs" role="tablist">
       <button class="zoom-tab" data-view="tam" aria-selected="false" type="button">
@@ -487,7 +545,7 @@
         <span class="zoom-tab-sub">3-yr revenue</span>
       </button>
     </div>
- 
+
     <div class="zoom-body">
       <!-- MAP -->
       <div class="zoom-stage" aria-hidden="true">
@@ -532,7 +590,7 @@
           <span data-view="tam">Sub-Saharan Africa · 24M km²</span>
         </div>
       </div>
- 
+
       <!-- CAPTIONS -->
       <div class="zoom-captions">
         <div class="zoom-caption" data-view="tam">
@@ -553,7 +611,34 @@
       </div>
     </div>
   </div>
- 
+
+  <!-- Revenue Chart -->
+  <div class="rev-chart fade-up">
+    <div class="rev-chart-title">Three-year revenue trajectory</div>
+    <div class="rev-bars">
+      <div class="rev-bar-wrap">
+        <div class="rev-bar-val">~$13K</div>
+        <div class="rev-bar" style="background:rgba(245,166,35,0.3);height:7px;" title="Epoch 1"></div>
+        <div class="rev-bar-label">Epoch 1<br><span style="color:rgba(255,255,255,0.3);font-size:11px;">750 pico</span></div>
+      </div>
+      <div class="rev-bar-wrap">
+        <div class="rev-bar-val">~$312K</div>
+        <div class="rev-bar" style="background:rgba(245,166,35,0.5);height:42px;" title="Epoch 2"></div>
+        <div class="rev-bar-label">Epoch 2<br><span style="color:rgba(255,255,255,0.3);font-size:11px;">12.5K pico + 2.5K mid</span></div>
+      </div>
+      <div class="rev-bar-wrap">
+        <div class="rev-bar-val">~$745K</div>
+        <div class="rev-bar" style="background:rgba(245,166,35,0.75);height:100px;" title="Epoch 3"></div>
+        <div class="rev-bar-label">Epoch 3<br><span style="color:rgba(255,255,255,0.3);font-size:11px;">25K + 5K + 1K units</span></div>
+      </div>
+      <div class="rev-bar-wrap">
+        <div class="rev-bar-val" style="color:#F5A623;">$1.5–2.5M</div>
+        <div class="rev-bar" style="background:linear-gradient(180deg,rgba(245,166,35,0.9),rgba(245,166,35,0.6));height:148px;border-top:2px dashed rgba(245,166,35,0.6);" title="Epoch 4 run-rate"></div>
+        <div class="rev-bar-label">Epoch 4<br><span style="color:rgba(255,255,255,0.3);font-size:11px;">Annual run-rate</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ══════════════════════════════════ 05 PILOT ══════════════════════════════════ -->
 <section class="pitch-section" id="sec-pilot">
@@ -752,13 +837,14 @@
   <div class="contact-grid fade-up">
     <div class="contact-info">
       <p>Navo Solar is currently raising the Epoch 1 pilot of $9,000–$12,000 and welcomes outreach from social venture investors, VSLA-deploying NGOs in West Nile, and Kampala-based Sun King / d.light authorised distributors.</p>
-      <a href="mailto:navosolar@gmail.com" class="contact-btn">Open an Inquiry →</a>
+      <a href="mailto:novasolar@gmail.com" class="contact-btn">Open an Inquiry →</a>
     </div>
     <div class="contact-details">
       <div class="contact-detail-row"><span class="detail-label">Pilot geography</span><span class="detail-val">Arua & Yumbe districts, West Nile, Uganda</span></div>
       <div class="contact-detail-row"><span class="detail-label">Capital raise</span><span class="detail-val">$9,000–$12,000 (full pilot)</span></div>
       <div class="contact-detail-row"><span class="detail-label">Timeline</span><span class="detail-val">4 months from CBT recruitment</span></div>
-      <div class="contact-detail-row"><span class="detail-label">Email</span><span class="detail-val"><a href="mailto:navosolar@gmail.com" style="color:var(--earth);text-decoration:none;">navosolar@gmail.com</a></span></div>
+      <div class="contact-detail-row"><span class="detail-label">Email</span><span class="detail-val"><a href="mailto:novasolar@gmail.com" style="color:var(--earth);text-decoration:none;">novasolar@gmail.com</a></span></div>
+      <div class="contact-detail-row"><span class="detail-label">Document version</span><span class="detail-val">Investor pitch — April 2026</span></div>
     </div>
   </div>
 </section>
@@ -797,7 +883,7 @@
       if (!isOpen) item.classList.add('open');
     });
   });
- 
+
   // Active TOC link on scroll
   const sections = document.querySelectorAll('[id^="sec-"]');
   const tocLinks = document.querySelectorAll('.toc-link');
@@ -811,7 +897,7 @@
     });
   }, { rootMargin: '-30% 0px -60% 0px' });
   sections.forEach(s => io.observe(s));
- 
+
   // ─── MARKET ZOOM (TAM / SAM / SOM) ─────────────────────────────────────────
   (function () {
     const ZOOM_VIEWS = {
@@ -821,15 +907,15 @@
     };
     const DURATION = 850;
     function ease(t) { return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2; }
- 
+
     document.querySelectorAll('.market-zoom').forEach(function(zoom) {
       const tabs = zoom.querySelectorAll('.zoom-tab');
       const svg  = zoom.querySelector('.zoom-svg');
       let cur = { x: 464.44, y: 326.82, w: 20, h: 20 };
       let raf = null;
- 
+
       function setVB(v) { svg.setAttribute('viewBox', v.x+' '+v.y+' '+v.w+' '+v.h); }
- 
+
       function animateTo(target) {
         if (raf) cancelAnimationFrame(raf);
         const from  = Object.assign({}, cur);
@@ -844,7 +930,7 @@
         }
         raf = requestAnimationFrame(tick);
       }
- 
+
       tabs.forEach(function(tab) {
         tab.addEventListener('click', function() {
           const view = tab.getAttribute('data-view');
@@ -855,7 +941,7 @@
       });
     });
   })();
- 
+
   // Scroll animations
   const fadeObserver = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); fadeObserver.unobserve(e.target); } });
