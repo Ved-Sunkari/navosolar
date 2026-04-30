@@ -549,7 +549,7 @@
     <div class="zoom-body">
       <!-- MAP -->
       <div class="zoom-stage" aria-hidden="true">
-        <svg viewBox="57 59 500 425" preserveAspectRatio="xMidYMid meet" class="zoom-svg">
+        <svg viewBox="0 0 700 700" preserveAspectRatio="xMidYMid meet" class="zoom-svg">
           <defs>
             <clipPath id="ssa-clip"><use href="#ssa-region" /></clipPath>
           </defs>
@@ -901,7 +901,7 @@
   // ─── MARKET ZOOM (TAM / SAM / SOM) ─────────────────────────────────────────
   (function () {
     const ZOOM_VIEWS = {
-      tam: { x: 57,     y: 59,     w: 500,  h: 425  },  // full Africa continent
+      tam: { x: 0,     y: 0,     w: 700,  h: 700  },  // full Africa continent
       sam: { x: 303,    y: 310,    w: 255,  h: 175  },  // Uganda + neighbours
       som: { x: 464.44, y: 326.82, w: 20,   h: 20   },  // West Nile sub-county
     };
@@ -911,7 +911,7 @@
     document.querySelectorAll('.market-zoom').forEach(function(zoom) {
       const tabs = zoom.querySelectorAll('.zoom-tab');
       const svg  = zoom.querySelector('.zoom-svg');
-      let cur = { x: 57, y: 59, w: 500, h: 425 };
+      let cur = { x: 0, y: 0, w: 700, h: 700 };
       let raf = null;
 
       function setVB(v) { svg.setAttribute('viewBox', v.x+' '+v.y+' '+v.w+' '+v.h); }
