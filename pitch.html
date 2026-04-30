@@ -190,63 +190,203 @@
   .product-desc { font-size: 14px; color: var(--mid); font-weight: 300; margin-top: 16px; line-height: 1.6; font-style: italic; }
 
   /* ── 04 MARKET ZOOM ── */
-  .market-zoom { border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; background: rgba(0,0,0,0.25); }
+  .market-zoom {
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    background: rgba(0,0,0,0.25);
+  }
 
   /* Tab bar */
   .zoom-tabs { display: flex; border-bottom: 1px solid rgba(255,255,255,0.08); }
   .zoom-tab {
-    flex: 1; background: none; border: none; border-bottom: 2px solid transparent;
-    padding: 16px 12px; cursor: pointer; text-align: center;
-    transition: background 0.2s, border-color 0.2s;
-    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    flex: 1;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 16px 12px;
+    cursor: pointer;
+    text-align: center;
+    transition: background 0.2s ease, border-color 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
   }
   .zoom-tab:hover { background: rgba(255,255,255,0.05); }
   .zoom-tab[aria-selected="true"] { border-bottom-color: var(--sun); background: rgba(245,166,35,0.06); }
   .zoom-tab-label {
-    font-family: 'Fraunces', serif; font-size: 22px; font-weight: 600;
-    color: rgba(255,255,255,0.4); letter-spacing: -0.5px; line-height: 1;
-    transition: color 0.2s;
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: -0.5px;
+    line-height: 1;
+    transition: color 0.2s ease;
   }
   .zoom-tab[aria-selected="true"] .zoom-tab-label { color: var(--sun); }
-  .zoom-tab-sub { font-size: 11px; font-weight: 400; color: rgba(255,255,255,0.3); letter-spacing: 0.05em; text-transform: uppercase; transition: color 0.2s; }
+  .zoom-tab-sub {
+    font-size: 11px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: color 0.2s ease;
+  }
   .zoom-tab[aria-selected="true"] .zoom-tab-sub { color: rgba(255,255,255,0.55); }
 
   /* Body: map + caption side by side */
   .zoom-body { display: grid; grid-template-columns: 1fr 1fr; min-height: 360px; }
-  .zoom-stage { position: relative; border-right: 1px solid rgba(255,255,255,0.07); background: rgba(0,0,0,0.2); }
+  .zoom-stage {
+    position: relative;
+    border-right: 1px solid rgba(255,255,255,0.07);
+    background: rgba(0,0,0,0.2);
+    overflow: hidden;
+  }
   .zoom-svg { width: 100%; height: 100%; display: block; }
 
-  /* Map paths */
-  .layer-africa { fill: rgba(255,255,255,0.04); stroke: rgba(255,255,255,0.1); stroke-width: 0.5; }
-  .layer-ssa { fill: rgba(44,95,46,0.22); stroke: rgba(44,140,63,0.7); stroke-width: 0.3; transition: fill 0.4s; }
+  /* Zoom is driven by animating the SVG viewBox attribute in JS, not CSS transform. */
+  .layer-africa {
+    fill: rgba(255,255,255,0.04);
+    stroke: rgba(255,255,255,0.1);
+    stroke-width: 0.5;
+    vector-effect: non-scaling-stroke;
+    transition: opacity 0.4s ease, stroke 0.4s ease;
+  }
+
+  .layer-ssa {
+    fill: rgba(44,95,46,0.22);
+    stroke: rgba(44,140,63,0.7);
+    stroke-width: 0.3;
+    vector-effect: non-scaling-stroke;
+    transition: fill 0.4s ease, stroke 0.4s ease, opacity 0.4s ease;
+  }
   .market-zoom[data-view="tam"] .layer-ssa { fill: rgba(245,166,35,0.18); stroke: rgba(245,166,35,0.55); }
-  .market-zoom[data-view="sam"] .layer-ssa { fill: rgba(44,95,46,0.3); stroke: rgba(44,140,63,0.9); }
-  .market-zoom[data-view="som"] .layer-ssa { fill: rgba(44,95,46,0.22); stroke: rgba(44,140,63,0.7); }
-  .layer-westnile { fill: rgba(245,166,35,1); stroke: rgba(245,166,35,0.9); stroke-width: 0.15; transition: fill 0.4s; }
-  .market-zoom[data-view="tam"] .layer-westnile { fill: rgba(245,166,35,0.12); stroke: rgba(245,166,35,0.3); }
-  .market-zoom[data-view="sam"] .layer-westnile { fill: rgba(245,166,35,0.5); stroke: rgba(245,166,35,1); }
-  .market-zoom[data-view="som"] .layer-westnile { fill: rgba(245,166,35,0.35); stroke: rgba(245,166,35,0.9); }
-  .ssa-spread circle { fill: rgba(245,166,35,0.55); }
-  .som-dots circle { fill: rgba(44,140,63,0.7); transition: fill 0.4s; }
-  .market-zoom[data-view="som"] .som-dots circle { fill: var(--sun); }
-  .leader { stroke: rgba(255,255,255,0.15); stroke-width: 0.2; stroke-dasharray: 1 0.8; }
-  .marker-ring { fill: none; stroke: var(--sun); stroke-width: 0.4; opacity: 0.6; animation: markerPulse 2.5s ease-in-out infinite; }
+  .market-zoom[data-view="sam"] .layer-ssa { fill: rgba(44,95,46,0.3); stroke: transparent; }
+  .market-zoom[data-view="som"] .layer-ssa { fill: rgba(44,95,46,0.22); stroke: transparent; }
+  .market-zoom[data-view="sam"] .layer-africa,
+  .market-zoom[data-view="som"] .layer-africa { stroke: transparent; }
+
+  /* Leader lines — directional cues that the surrounding borders continue off-frame. */
+  .leader {
+    stroke: rgba(245,166,35,0.55);
+    stroke-width: 0.2;
+    stroke-linecap: round;
+    stroke-dasharray: 1 0.8;
+    vector-effect: non-scaling-stroke;
+    fill: none;
+    opacity: 0;
+    transition: opacity 0.4s ease 0.4s;
+  }
+  .market-zoom[data-view="sam"] .leader,
+  .market-zoom[data-view="som"] .leader { opacity: 1; }
+
+  .layer-westnile {
+    fill: rgba(245,166,35,0.70);
+    stroke: var(--sun);
+    stroke-width: 0.15;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+    opacity: 0;
+    transition: opacity 0.5s ease 0.4s, fill 0.4s ease, stroke 0.4s ease;
+  }
+  .market-zoom[data-view="tam"] .layer-westnile { fill: rgba(245,166,35,0.12); stroke: rgba(245,166,35,0.3); opacity: 1; }
+  .market-zoom[data-view="sam"] .layer-westnile { fill: rgba(245,166,35,0.5); stroke: rgba(245,166,35,1); opacity: 1; }
+  .market-zoom[data-view="som"] .layer-westnile { fill: rgba(255,255,255,0.92); stroke: rgba(245,166,35,0.9); opacity: 1; }
+
+  .som-dots circle {
+    fill: rgba(245,166,35,1);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    vector-effect: non-scaling-stroke;
+  }
+  .market-zoom[data-view="som"] .som-dots circle { opacity: 1; }
+  .market-zoom[data-view="som"] .som-dots circle:nth-child(1) { transition-delay: 0.55s; }
+  .market-zoom[data-view="som"] .som-dots circle:nth-child(2) { transition-delay: 0.62s; }
+  .market-zoom[data-view="som"] .som-dots circle:nth-child(3) { transition-delay: 0.69s; }
+  .market-zoom[data-view="som"] .som-dots circle:nth-child(4) { transition-delay: 0.76s; }
+  .market-zoom[data-view="som"] .som-dots circle:nth-child(5) { transition-delay: 0.83s; }
+  .market-zoom[data-view="som"] .som-dots circle:nth-child(6) { transition-delay: 0.90s; }
+  .market-zoom[data-view="som"] .som-dots circle:nth-child(7) { transition-delay: 0.97s; }
+  .market-zoom[data-view="som"] .som-dots circle:nth-child(8) { transition-delay: 1.04s; }
+  .market-zoom[data-view="som"] .som-dots circle:nth-child(9) { transition-delay: 1.11s; }
+  .market-zoom[data-view="som"] .som-dots circle:nth-child(10) { transition-delay: 1.18s; }
+  .market-zoom[data-view="som"] .som-dots circle:nth-child(11) { transition-delay: 1.25s; }
+  .market-zoom[data-view="som"] .som-dots circle:nth-child(12) { transition-delay: 1.32s; }
+  .market-zoom[data-view="som"] .som-dots circle:nth-child(13) { transition-delay: 1.39s; }
+
+  /* TAM-only sun ripple clipped to the Sub-Saharan Africa path. */
+  .ssa-spread circle {
+    fill: rgba(245,166,35,0.55);
+    opacity: 0;
+    transform: scale(1);
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  .market-zoom[data-view="tam"] .ssa-spread circle {
+    animation: ssa-spread 2.6s 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  }
+  @keyframes ssa-spread {
+    0%   { transform: scale(1);   opacity: 0; }
+    6%   { opacity: 1; }
+    100% { transform: scale(450); opacity: 1; }
+  }
+
+  /* TAM-only halo over the West Nile centroid so users can see the target spot. */
+  .zoom-marker {
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+  .marker-ring {
+    fill: none;
+    stroke: var(--sun);
+    stroke-width: 0.4;
+    opacity: 0.8;
+    animation: markerPulse 2.5s ease-in-out infinite;
+  }
   .marker-dot { fill: var(--sun); }
-  @keyframes markerPulse { 0%,100%{opacity:0.6;r:9} 50%{opacity:0.2;r:13} }
+  .market-zoom[data-view="sam"] .zoom-marker,
+  .market-zoom[data-view="som"] .zoom-marker { opacity: 0; }
+  @keyframes markerPulse {
+    0%, 100% { opacity: 0.75; r: 9; }
+    50%      { opacity: 0.22; r: 13; }
+  }
 
   /* Scale label */
-  .zoom-scale-label { position: absolute; bottom: 12px; left: 12px; font-size: 10px; color: rgba(255,255,255,0.35); font-weight: 300; letter-spacing: 0.04em; }
+  .zoom-scale-label {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    font-size: 10px;
+    color: rgba(255,255,255,0.35);
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    pointer-events: none;
+  }
   .zoom-scale-label span { display: none; }
   .market-zoom[data-view="som"] .zoom-scale-label span[data-view="som"],
   .market-zoom[data-view="sam"] .zoom-scale-label span[data-view="sam"],
   .market-zoom[data-view="tam"] .zoom-scale-label span[data-view="tam"] { display: inline; }
 
   /* Captions panel */
-  .zoom-captions { display: flex; flex-direction: column; justify-content: center; padding: 40px 36px; }
-  .zoom-caption { display: none; }
+  .zoom-captions {
+    position: relative;
+    min-height: 280px;
+    padding: 40px 36px;
+  }
+  .zoom-caption {
+    position: absolute;
+    inset: 40px 36px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
   .market-zoom[data-view="som"] .zoom-caption[data-view="som"],
   .market-zoom[data-view="sam"] .zoom-caption[data-view="sam"],
-  .market-zoom[data-view="tam"] .zoom-caption[data-view="tam"] { display: block; }
+  .market-zoom[data-view="tam"] .zoom-caption[data-view="tam"] {
+    opacity: 1;
+    pointer-events: auto;
+  }
   .zoom-caption-label { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 10px; }
   .zoom-caption-num { font-family: 'Fraunces', serif; font-size: 48px; font-weight: 300; color: var(--sun); letter-spacing: -1.5px; line-height: 1; margin-bottom: 20px; }
   .zoom-caption p { font-size: 15px; color: rgba(255,255,255,0.55); font-weight: 300; line-height: 1.7; }
@@ -254,6 +394,16 @@
   @media (max-width: 900px) {
     .zoom-body { grid-template-columns: 1fr; }
     .zoom-stage { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); min-height: 260px; }
+    .zoom-captions { min-height: 250px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .market-zoom[data-view="tam"] .ssa-spread circle {
+      animation: none;
+      transform: scale(450);
+      opacity: 1;
+    }
+    .marker-ring { animation: none; }
   }
 
   /* Revenue chart */
