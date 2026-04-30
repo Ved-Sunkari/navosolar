@@ -760,7 +760,7 @@
       if (!isOpen) item.classList.add('open');
     });
   });
-
+ 
   // Active TOC link on scroll
   const sections = document.querySelectorAll('[id^="sec-"]');
   const tocLinks = document.querySelectorAll('.toc-link');
@@ -774,7 +774,51 @@
     });
   }, { rootMargin: '-30% 0px -60% 0px' });
   sections.forEach(s => io.observe(s));
-
+ 
+  // ─── MARKET ZOOM (TAM / SAM / SOM) ─────────────────────────────────────────
+  (function () {
+    const ZOOM_VIEWS = {
+      tam: { x: 57,     y: 59,     w: 500,  h: 425  },  // full Africa continent
+      sam: { x: 303,    y: 310,    w: 255,  h: 175  },  // Uganda + neighbours
+      som: { x: 464.44, y: 326.82, w: 20,   h: 20   },  // West Nile sub-county
+    };
+    const DURATION = 850;
+    function ease(t) { return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2; }
+ 
+    document.querySelectorAll('.market-zoom').forEach(function(zoom) {
+      const tabs = zoom.querySelectorAll('.zoom-tab');
+      const svg  = zoom.querySelector('.zoom-svg');
+      let cur = { x: 464.44, y: 326.82, w: 20, h: 20 };
+      let raf = null;
+ 
+      function setVB(v) { svg.setAttribute('viewBox', v.x+' '+v.y+' '+v.w+' '+v.h); }
+ 
+      function animateTo(target) {
+        if (raf) cancelAnimationFrame(raf);
+        const from  = Object.assign({}, cur);
+        const start = performance.now();
+        function tick(now) {
+          const t = Math.min(1, (now - start) / DURATION);
+          const e = ease(t);
+          cur = { x: from.x+(target.x-from.x)*e, y: from.y+(target.y-from.y)*e,
+                  w: from.w+(target.w-from.w)*e, h: from.h+(target.h-from.h)*e };
+          setVB(cur);
+          if (t < 1) { raf = requestAnimationFrame(tick); } else { raf = null; }
+        }
+        raf = requestAnimationFrame(tick);
+      }
+ 
+      tabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          const view = tab.getAttribute('data-view');
+          zoom.setAttribute('data-view', view);
+          tabs.forEach(function(t) { t.setAttribute('aria-selected', t === tab ? 'true' : 'false'); });
+          animateTo(ZOOM_VIEWS[view]);
+        });
+      });
+    });
+  })();
+ 
   // Scroll animations
   const fadeObserver = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); fadeObserver.unobserve(e.target); } });
