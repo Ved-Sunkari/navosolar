@@ -118,21 +118,11 @@
  }
  
  .chart-svg {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 700 / 190;
-  display: block;
-}
-
-.chart-legend {
-  display: flex;
-  gap: 18px;
-  margin-top: 10px;
-  padding-left: 35px;
-  flex-wrap: wrap;
-  font-size: 12px;
-  color: #6B7280;
-}
+   width: 100%;
+   height: auto;
+   aspect-ratio: 700 / 160;
+   display: block;
+ }
  
  .chart-highlight-row .highlight-box {
    margin-bottom: 0 !important;
@@ -401,55 +391,43 @@
    <div class="chart-wrap fade-up">
     <div class="chart-title">Cumulative Cost: Kerosene vs. Pico Solar Kit (12 months)</div>
     <div class="chart-area">
-  <svg class="chart-svg" viewBox="0 0 700 190" preserveAspectRatio="xMidYMid meet">
-    <!-- chart content only, no legend inside SVG -->
-
-    <line x1="60" y1="20" x2="60" y2="145" stroke="rgba(0,0,0,0.08)" />
-    <line x1="60" y1="145" x2="680" y2="145" stroke="rgba(0,0,0,0.08)" />
-
-    <text x="8" y="150" font-size="11" fill="#9CA3AF">$0</text>
-    <text x="8" y="105" font-size="11" fill="#9CA3AF">$90</text>
-    <text x="8" y="65" font-size="11" fill="#9CA3AF">$135</text>
-    <text x="8" y="24" font-size="11" fill="#9CA3AF">$180</text>
-
-    <line x1="60" y1="105" x2="680" y2="105" stroke="rgba(0,0,0,0.04)" stroke-dasharray="4,4"/>
-    <line x1="60" y1="65" x2="680" y2="65" stroke="rgba(0,0,0,0.04)" stroke-dasharray="4,4"/>
-    <line x1="60" y1="24" x2="680" y2="24" stroke="rgba(0,0,0,0.04)" stroke-dasharray="4,4"/>
-
-    <text x="60" y="170" text-anchor="middle" font-size="11" fill="#9CA3AF">0</text>
-    <text x="215" y="170" text-anchor="middle" font-size="11" fill="#9CA3AF">3 mo</text>
-    <text x="370" y="170" text-anchor="middle" font-size="11" fill="#9CA3AF">6 mo</text>
-    <text x="525" y="170" text-anchor="middle" font-size="11" fill="#9CA3AF">9 mo</text>
-    <text x="680" y="170" text-anchor="middle" font-size="11" fill="#9CA3AF">12 mo</text>
-
-    <polygon points="100,134.5 215,113.5 370,82 525,50.5 680,20 680,134.5" fill="rgba(44,95,46,0.06)"/>
-
-    <polyline points="60,145 215,113.5 370,82 525,50.5 680,20"
-      fill="none" stroke="#E87B4A" stroke-width="2.5" stroke-linecap="round"/>
-
-    <polyline points="60,134.5 680,134.5"
-      fill="none" stroke="#2C5F2E" stroke-width="2.5" stroke-linecap="round"/>
-
-    <circle cx="100" cy="134.5" r="5" fill="#2C5F2E"/>
-    <text x="305" y="105" font-size="10" fill="#2C5F2E">payback</text>
-  </svg>
-</div>
-
-<div class="chart-legend">
-  <div class="chart-legend-item">
-    <div class="chart-legend-dot" style="background:#E87B4A;"></div>
-    Kerosene · $15/month
-  </div>
-  <div class="chart-legend-item">
-    <div class="chart-legend-dot" style="background:#2C5F2E;"></div>
-    Solar · $15 one-time
-  </div>
-  <div class="chart-legend-item">
-    <div class="chart-legend-dot" style="background:rgba(44,95,46,0.2);"></div>
-    Savings
-  </div>
-</div>
-    
+      <svg class="chart-svg" viewBox="0 0 700 160" preserveAspectRatio="xMidYMid meet" id="costChart">
+        <!-- Grid lines -->
+        <line x1="60" y1="10" x2="60" y2="140" stroke="rgba(0,0,0,0.08)" stroke-width="1"/>
+        <line x1="60" y1="140" x2="680" y2="140" stroke="rgba(0,0,0,0.08)" stroke-width="1"/>
+        <!-- Y axis labels -->
+        <text x="8" y="145" font-family="DM Sans" font-size="11" fill="#9CA3AF">$0</text>
+        <text x="8" y="100" font-family="DM Sans" font-size="11" fill="#9CA3AF">$90</text>
+        <text x="8" y="55" font-family="DM Sans" font-size="11" fill="#9CA3AF">$135</text>
+        <text x="8" y="14" font-family="DM Sans" font-size="11" fill="#9CA3AF">$180</text>
+        <!-- Horizontal guides -->
+        <line x1="60" y1="100" x2="680" y2="100" stroke="rgba(0,0,0,0.04)" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="60" y1="55" x2="680" y2="55" stroke="rgba(0,0,0,0.04)" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="60" y1="14" x2="680" y2="14" stroke="rgba(0,0,0,0.04)" stroke-width="1" stroke-dasharray="4,4"/>
+        <!-- X axis labels -->
+        <text x="60" y="155" text-anchor="middle" font-family="DM Sans" font-size="11" fill="#9CA3AF">0</text>
+        <text x="215" y="155" text-anchor="middle" font-family="DM Sans" font-size="11" fill="#9CA3AF">3 mo</text>
+        <text x="370" y="155" text-anchor="middle" font-family="DM Sans" font-size="11" fill="#9CA3AF">6 mo</text>
+        <text x="525" y="155" text-anchor="middle" font-family="DM Sans" font-size="11" fill="#9CA3AF">9 mo</text>
+        <text x="680" y="155" text-anchor="middle" font-family="DM Sans" font-size="11" fill="#9CA3AF">12 mo</text>
+        <!-- Kerosene line: $15/mo linear, $0→$180 -->
+        <!-- $180 maps to y=14, $0→y=140. Scale: (180/180)*126 = 126 px range -->
+        <polyline points="60,140 215,97.5 370,55 525,12.5" fill="none" stroke="#E87B4A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- Payback marker at ~1.5mo -->
+        <circle cx="93" cy="129.2" r="5" fill="#2C5F2E"/>
+        <text x="300" y="100" font-family="DM Sans" font-size="10" fill="#2C5F2E" font-weight="500">payback</text>
+        <!-- Solar flat line at $15 -->
+        <!-- $15 = 140 - (15/180)*126 = 140-10.5 = 129.5 -->
+        <polyline points="60,129.5 80,129.5 680,129.5" fill="none" stroke="#2C5F2E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- Shading between lines -->
+        <polygon points="80,129.5 215,97.5 370,55 525,12.5 525,129.5" fill="rgba(44,95,46,0.06)"/>
+      </svg>
+    </div>
+    <div class="chart-legend">
+      <div class="chart-legend-item"><div class="chart-legend-dot" style="background:#E87B4A;"></div>Kerosene · $15/month (cumulative)</div>
+      <div class="chart-legend-item"><div class="chart-legend-dot" style="background:#2C5F2E;"></div>Pico solar kit · $15 one-time</div>
+      <div class="chart-legend-item"><div class="chart-legend-dot" style="background:rgba(44,95,46,0.2);"></div>Savings vs. kerosene</div>
+    </div>
   </div>
   </div>
 
