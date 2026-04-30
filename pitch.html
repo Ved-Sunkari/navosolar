@@ -100,6 +100,41 @@
   .chart-legend { display: flex; gap: 24px; margin-top: 16px; flex-wrap: wrap; }
   .chart-legend-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--mid); font-weight: 300; }
   .chart-legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+  .chart-highlight-row {
+   display: grid;
+   grid-template-columns: minmax(0, 1.55fr) minmax(260px, 0.75fr);
+   gap: 24px;
+   align-items: stretch;
+   margin-top: 32px;
+ }
+ 
+ .chart-wrap {
+   width: 100%;
+   min-width: 0;
+ }
+ 
+ .chart-area {
+   width: 100%;
+ }
+ 
+ .chart-svg {
+   width: 100%;
+   height: auto;
+   aspect-ratio: 700 / 160;
+   display: block;
+ }
+ 
+ .chart-highlight-row .highlight-box {
+   margin-bottom: 0 !important;
+   height: fit-content;
+   align-self: center;
+ }
+ 
+ @media (max-width: 800px) {
+   .chart-highlight-row {
+     grid-template-columns: 1fr;
+   }
+ }
 
   /* ── 02 MODEL ── */
   .model-roles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: rgba(255,255,255,0.07); border-radius: 4px; overflow: hidden; margin-bottom: 40px; }
@@ -351,12 +386,9 @@
   <h2 class="pitch-h2 fade-up">Energy poverty that isn't being solved<br>by the models that <em>exist</em>.</h2>
   <p class="pitch-lead fade-up">The West Nile region — Arua, Yumbe, Adjumani, Obongi, Zombo, Pakwach, and Nebbi — is home to roughly 536,000 off-grid households. While a transmission line reached Arua town in 2024, last-mile rural connection remains years away for the vast majority.</p>
 
-  <div class="highlight-box fade-up" style="margin-bottom:40px;">
-    <p>Households spend <strong>$6–$15 per month on kerosene</strong> — 15–25% of typical monthly income for subsistence farmers earning $1–$3 per day. A <strong>$15 pico solar kit pays for itself in one to two months</strong> and eliminates ongoing kerosene spend entirely. The value proposition is not aspirational — it's immediately economic.</p>
-  </div>
-
-  <!-- Kerosene vs Solar Chart -->
-  <div class="chart-wrap fade-up">
+ <div class="chart-highlight-row fade-up">
+  <div class="chart-wrap">
+   <div class="chart-wrap fade-up">
     <div class="chart-title">Cumulative Cost: Kerosene vs. Pico Solar Kit (12 months)</div>
     <div class="chart-area">
       <svg class="chart-svg" viewBox="0 0 700 160" preserveAspectRatio="xMidYMid meet" id="costChart">
@@ -397,6 +429,14 @@
       <div class="chart-legend-item"><div class="chart-legend-dot" style="background:rgba(44,95,46,0.2);"></div>Savings vs. kerosene</div>
     </div>
   </div>
+  </div>
+
+  <div class="highlight-box">
+    <p>Households spend <strong>$6–$15 per month on kerosene</strong> — 15–25% of typical monthly income for subsistence farmers earning $1–$3 per day. A <strong>$15 pico solar kit pays for itself in one to two months</strong> and eliminates ongoing kerosene spend entirely.</p>
+  </div>
+</div>
+  <!-- Kerosene vs Solar Chart -->
+  
 
   <div class="problem-grid" style="margin-top:40px;">
     <div class="p-card fade-up">
