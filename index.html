@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Navo Solar — Light for West Nile</title>
+<title>Nova Solar — Light for West Nile</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -146,19 +146,8 @@
   .donate-text h2 em { color: var(--sky); }
   .donate-text p { font-size: 17px; color: rgba(0,0,0,0.6); font-weight: 300; margin-bottom: 32px; line-height: 1.65; }
   .donate-actions { display: flex; gap: 16px; flex-wrap: wrap; }
-  /* GoFundMe placeholder widget */
-  .gofundme-box { background: var(--white); border-radius: 8px; padding: 40px; box-shadow: 0 8px 40px rgba(0,0,0,0.12); }
-  .gofundme-box h3 { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 600; margin-bottom: 8px; color: var(--charcoal); }
-  .gofundme-box .gfm-sub { font-size: 14px; color: var(--mid); margin-bottom: 28px; font-weight: 300; }
-  .progress-bar-bg { background: #eee; border-radius: 100px; height: 10px; margin-bottom: 12px; overflow: hidden; }
-  .progress-bar-fill { background: linear-gradient(90deg, var(--earth), var(--earth-mid)); height: 100%; border-radius: 100px; width: 0%; transition: width 1.2s ease; }
-  .gfm-amounts { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 24px; }
-  .gfm-raised { font-weight: 600; color: var(--earth); font-size: 22px; font-family: 'Fraunces', serif; }
-  .gfm-goal { color: var(--mid); font-weight: 300; }
-  .gfm-donors { font-size: 13px; color: var(--mid); margin-bottom: 28px; font-weight: 300; }
-  .gfm-btn { display: block; width: 100%; text-align: center; background: #02A95C; color: white; padding: 14px; border-radius: 6px; font-weight: 500; font-size: 16px; text-decoration: none; transition: background 0.2s; border: none; cursor: pointer; }
-  .gfm-btn:hover { background: #028c4d; }
-  .gfm-note { font-size: 12px; color: var(--mid); text-align: center; margin-top: 12px; font-weight: 300; }
+  /* GoFundMe embed sizing */
+  .gfm-widget-wrap { min-height: 420px; }
 
   /* PARTNERS */
   .partners { background: var(--light); padding: 64px 8%; text-align: center; }
@@ -182,18 +171,6 @@
   .team-names { display: flex; flex-direction: column; gap: 10px; }
   .team-name { display: flex; align-items: center; gap: 10px; font-size: 15px; color: rgba(255,255,255,0.8); font-weight: 300; }
   .team-name::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--sun); flex-shrink: 0; }
-  .team-name a {
-   color: rgba(255,255,255,0.8); /* match your text */
-   text-decoration: none;
- }
- 
- .team-name a:visited {
-   color: rgba(255,255,255,0.8); /* prevent purple after click */
- }
- 
- .team-name a:hover {
-   color: white; /* optional: brighter on hover */
- }
   .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: rgba(255,255,255,0.3); font-weight: 300; }
   .footer-bottom a { color: rgba(255,255,255,0.4); text-decoration: none; }
 
@@ -250,7 +227,7 @@
       <line x1="12.1" y1="21.9" x2="10" y2="24" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/>
       <rect x="4" y="28" width="28" height="6" rx="2" fill="#2C5F2E"/>
     </svg>
-    <span class="nav-logo-text">Navo <span>Solar</span></span>
+    <span class="nav-logo-text">Nova <span>Solar</span></span>
   </a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
@@ -258,7 +235,7 @@
     <li><a href="#how-it-works">Our Model</a></li>
     <li><a href="#impact">Impact</a></li>
     <li><a href="#volunteer">Get Involved</a></li>
-    <li><a href="pitch.html">Solution</a></li>
+    <li><a href="pitch.html">Investor Pitch</a></li>
     <li><a href="#donate" class="nav-cta">Donate</a></li>
   </ul>
 </nav>
@@ -287,8 +264,8 @@
   </div>
   <div class="hero-content">
     <div class="hero-eyebrow">West Nile, Uganda</div>
-    <h1>Bringing <em>solar light</em> to off-grid homes</h1>
-    <p class="hero-sub">Navo Solar connects communities through trusted Village Savings networks to deliver affordable, quality solar energy — one household at a time.</p>
+    <h1>Bringing <em>solar light</em><br>to off-grid homes</h1>
+    <p class="hero-sub">Nova Solar connects communities through trusted Village Savings networks to deliver affordable, quality solar energy — one household at a time.</p>
     <div class="hero-actions">
       <button class="btn-primary" onclick="openModal('volunteer')">Become a Volunteer</button>
       <a href="#about" class="btn-outline">Learn More</a>
@@ -309,40 +286,14 @@
   <div class="welcome-grid">
     <div class="welcome-visual fade-up">
       <div class="welcome-img-block">
-        <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
-          <rect width="400" height="500" fill="#D4EABB"/>
-          <defs><linearGradient id="sky1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#A8D8EA"/><stop offset="100%" stop-color="#D4EABB"/></linearGradient></defs>
-          <rect width="400" height="280" fill="url(#sky1)"/>
-          <circle cx="310" cy="80" r="45" fill="#F5A623" opacity="0.85"/>
-          <circle cx="310" cy="80" r="55" fill="#F5A623" opacity="0.2"/>
-          <polygon points="80,280 200,210 320,280" fill="#5C8A45"/>
-          <polygon points="80,280 200,220 320,280" fill="#4A7536"/>
-          <rect x="120" y="235" width="50" height="32" rx="2" fill="#1A4A7A" opacity="0.8"/>
-          <rect x="177" y="232" width="50" height="32" rx="2" fill="#1A4A7A" opacity="0.8"/>
-          <line x1="145" y1="235" x2="145" y2="267" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
-          <line x1="120" y1="251" x2="170" y2="251" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
-          <rect x="100" y="280" width="200" height="140" fill="#C8A96A"/>
-          <rect x="175" y="350" width="50" height="70" rx="4" fill="#6B4C13"/>
-          <rect x="120" y="310" width="45" height="35" rx="3" fill="#FFE4A0" opacity="0.9"/>
-          <rect x="235" y="310" width="45" height="35" rx="3" fill="#FFE4A0" opacity="0.9"/>
-          <ellipse cx="142" cy="327" rx="30" ry="20" fill="#F5A623" opacity="0.2"/>
-          <rect x="0" y="420" width="400" height="80" fill="#8B7355"/>
-          <ellipse cx="60" cy="405" rx="14" ry="20" fill="#5C3D1A"/>
-          <circle cx="60" cy="382" r="10" fill="#5C3D1A"/>
-          <ellipse cx="340" cy="408" rx="12" ry="18" fill="#5C3D1A"/>
-          <circle cx="340" cy="386" r="9" fill="#5C3D1A"/>
-          <rect x="185" y="420" width="30" height="4" rx="2" fill="#333"/>
-          <circle cx="200" cy="415" r="8" fill="#F5A623" opacity="0.9"/>
-          <circle cx="200" cy="415" r="12" fill="#F5A623" opacity="0.25"/>
-          <text x="200" y="480" text-anchor="middle" font-family="Georgia" font-size="13" fill="rgba(44,95,46,0.4)" font-style="italic">West Nile, Uganda</text>
-        </svg>
+        <img src="west-nile.jpg" alt="West Nile, Uganda" style="width:100%;height:100%;object-fit:cover;display:block;"/>
       </div>
       <div class="welcome-tag"><div class="welcome-tag-num">100%</div><div class="welcome-tag-txt">direct community impact</div></div>
     </div>
     <div class="welcome-text fade-up" style="transition-delay:.15s">
-      <div class="section-eyebrow">Welcome to Navo Solar</div>
+      <div class="section-eyebrow">Welcome to Nova Solar</div>
       <h2>Solar energy<br>through <em>community trust</em></h2>
-      <p>Navo Solar is a social venture bringing affordable, quality solar products to off-grid households in Uganda's West Nile region — a geography where existing models have failed and grid electricity remains years away.</p>
+      <p>Nova Solar is a social venture bringing affordable, quality solar products to off-grid households in Uganda's West Nile region — a geography where existing models have failed and grid electricity remains years away.</p>
       <p>We work through Village Savings and Loan Associations (VSLAs): trusted community groups where members save together, lend to each other, and now — access clean energy through a distribution model built on relationships, not just transactions.</p>
       <ul class="check-list">
         <li>Community-Based Trainers introduce solar products at weekly VSLA meetings</li>
@@ -387,7 +338,7 @@
 <!-- HOW IT WORKS -->
 <section class="how" id="how-it-works">
   <div class="section-eyebrow fade-up">Our Model</div>
-  <h2 class="fade-up">How <em>Navo Solar</em> works</h2>
+  <h2 class="fade-up">How <em>Nova Solar</em> works</h2>
   <p class="section-lead fade-up">We combine what previous models kept separate: community trust infrastructure and accountable, local commercial delivery — the first time these two have been united in this region.</p>
   <div class="steps">
     <div class="step fade-up"><div class="step-num">01</div><div class="step-tag">Trust Layer</div><h3>Community-Based Trainer</h3><p>A CARE-trained facilitator who has worked with VSLA members for months or years runs an information session at a weekly meeting — demonstrating the product from personal experience, not as a salesperson.</p></div>
@@ -442,7 +393,7 @@
 <section class="volunteer" id="volunteer">
   <div class="section-eyebrow fade-up">Get Involved</div>
   <h2 class="fade-up">Come and be part of<br><em>the change</em></h2>
-  <p class="section-lead fade-up">Whether you're a solar engineer, a community organiser, a researcher, or simply someone who cares — there's a meaningful role for you in Navo Solar.</p>
+  <p class="section-lead fade-up">Whether you're a solar engineer, a community organiser, a researcher, or simply someone who cares — there's a meaningful role for you in Nova Solar.</p>
   <div class="vol-grid">
     <div class="vol-card fade-up">
       <div class="vol-card-icon" style="background:var(--earth-light);">🌱</div>
@@ -494,23 +445,22 @@
     <div class="donate-text fade-up">
       <h2>Give today. Light<br><em>a home tonight</em>.</h2>
       <p>A $15 pico solar kit pays for itself in two months of kerosene savings. Your contribution funds the distribution infrastructure that gets it into the right hands.</p>
-      <p style="font-size:14px;color:rgba(0,0,0,0.45);font-weight:300;">Navo Solar is a pre-501(c)(3) social venture. Donations are not yet tax-deductible but go directly to community programs.</p>
+      <p style="font-size:14px;color:rgba(0,0,0,0.45);font-weight:300;">Nova Solar is a pre-501(c)(3) social venture. Donations are not yet tax-deductible but go directly to community programs.</p>
       <div class="donate-actions" style="margin-top:28px;">
-        <a href="#https://www.gofundme.com/f/bring-reliable-solar-power-to-offgrid-homes-in-rural-africa/cl/o?utm_campaign=man_sharesheet_dash&utm_content=amp17_control-amp20_control&utm_medium=customer&utm_source=copy_link&lang=en_US" class="btn-dark">Donate on GoFundMe</a>
+        <a href="https://www.gofundme.com/f/bring-reliable-solar-power-to-offgrid-homes-in-rural-africa" target="_blank" class="btn-dark">Donate on GoFundMe</a>
         <button class="btn-white" onclick="openModal('volunteer')">Volunteer Instead</button>
       </div>
     </div>
     <div class="fade-up" style="transition-delay:.15s">
-      <div class="gofundme-box" id="gofundme-campaign">
-        <h3>Support Navo Solar</h3>
-        <p class="gfm-sub">Help us light up homes in West Nile, Uganda</p>
-        <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill"></div></div>
-        <div class="gfm-amounts">
-          <div><div class="gfm-raised">$220</div><div style="font-size:13px;color:var(--mid);font-weight:300;">raised</div></div>
-          <div style="text-align:right"><div class="gfm-goal" style="font-size:18px;font-family:'Fraunces',serif;font-weight:600;color:var(--charcoal);">$12,000</div><div style="font-size:13px;color:var(--mid);font-weight:300;">goal</div></div>
+      <div style="background:var(--white);border-radius:8px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.12);">
+        <div class="gfm-widget-wrap">
+          <script src="https://www.gofundme.com/static/js/embed.js" defer></script>
+          <div class="gfm-embed"
+            data-url="https://www.gofundme.com/f/bring-reliable-solar-power-to-offgrid-homes-in-rural-africa/widget/large/"
+            data-image="show"
+            data-coinfo="hide">
+          </div>
         </div>
-        <a href="https://www.gofundme.com/f/bring-reliable-solar-power-to-offgrid-homes-in-rural-africa/cl/o?utm_campaign=man_sharesheet_dash&utm_content=amp17_control-amp20_control&utm_medium=customer&utm_source=copy_link&lang=en_US" target="_blank" class="gfm-btn" id="gfmBtn">Donate Now</a>
-       
       </div>
     </div>
   </div>
@@ -522,7 +472,7 @@
     <div class="footer-brand">
       <a class="nav-logo" href="#" style="color:white;">
         <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="16" r="7" fill="#F5A623"/><line x1="18" y1="4" x2="18" y2="7" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/><line x1="18" y1="25" x2="18" y2="28" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/><line x1="6" y1="16" x2="9" y2="16" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/><line x1="27" y1="16" x2="30" y2="16" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/><rect x="4" y="28" width="28" height="6" rx="2" fill="#2C5F2E"/></svg>
-        <span class="nav-logo-text" style="color:white;">Navo <span>Solar</span></span>
+        <span class="nav-logo-text" style="color:white;">Nova <span>Solar</span></span>
       </a>
       <p>Trust-embedded solar distribution through Village Savings Networks. West Nile Region, Uganda.</p>
     </div>
@@ -539,7 +489,7 @@
     <div class="footer-col">
       <h5>Contact</h5>
       <ul>
-        <li><a href="mailto:Navosolar@gmail.com">Navosolar@gmail.com</a></li>
+        <li><a href="mailto:novasolar@gmail.com">novasolar@gmail.com</a></li>
         <li><span>San Francisco, CA</span></li>
         <li style="margin-top:16px;"><a href="#donate" style="color:var(--sun);">Donate →</a></li>
       </ul>
@@ -548,27 +498,17 @@
       <div class="team-box">
         <h5>Our Team</h5>
         <div class="team-names">
-  <div class="team-name">
-    <a href="https://www.linkedin.com/in/ved-sunkari/" target="_blank">Ved Sunkari</a>
-  </div>
-  <div class="team-name">
-    <a href="https://www.linkedin.com/in/ananduw/" target="_blank">Anand Ajith</a>
-  </div>
-  <div class="team-name">
-    <a href="https://www.linkedin.com/in/amitav-krishna/" target="_blank">Amitav Krishna</a>
-  </div>
-  <div class="team-name">
-    <a href="https://www.linkedin.com/in/alexeimanuel/" target="_blank">Alexei Manuel</a>
-  </div>
-  <div class="team-name">
-    <a href="https://www.linkedin.com/in/bhavishyaa-vignesh-217626216/" target="_blank">Bhavishyaa Vignesh</a>
-  </div>
-</div>
+          <div class="team-name">Anand</div>
+          <div class="team-name">Ved</div>
+          <div class="team-name">Amitav</div>
+          <div class="team-name">Alexei</div>
+          <div class="team-name">Bhavi</div>
+        </div>
       </div>
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2026 Navo Solar. All rights reserved.</span>
+    <span>© 2026 Nova Solar. All rights reserved.</span>
     <span>Built on evidence. Powered by community.</span>
   </div>
 </footer>
@@ -647,8 +587,8 @@
 <script>
   // ─── SUPABASE CONFIG ────────────────────────────────────────────────────────
   // TODO: Replace these placeholders with your actual Supabase credentials
-  const SUPABASE_URL = 'https://pdwdkhbumrnxgacjkxap.supabase.co';   // e.g. https://pdwdkhbumrnxgacjkxap.supabase.co
-  const SUPABASE_ANON_KEY = 'sb_publishable_l_5SC2ieFdCyTHLsF9_QjA_YbXB9MhE'; // eyJ...
+  const SUPABASE_URL = 'YOUR_SUPABASE_PROJECT_URL';   // e.g. https://xxxx.supabase.co
+  const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY'; // eyJ...
 
   async function insertToSupabase(payload) {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/contact_submissions`, {
@@ -703,7 +643,7 @@
       document.getElementById(`success-${type}`).style.display = 'block';
     } catch (err) {
       console.error(err);
-      errEl.textContent = 'Something went wrong. Please email us directly at Navosolar@gmail.com';
+      errEl.textContent = 'Something went wrong. Please email us directly at novasolar@gmail.com';
       errEl.style.display = 'block';
       btnEl.disabled = false;
       btnEl.textContent = btnEl.dataset.label || 'Send';
@@ -728,11 +668,6 @@
       }
     });
   });
-
-  // ─── GOFUNDME PROGRESS BAR ──────────────────────────────────────────────────
-  setTimeout(() => {
-    document.getElementById('progressFill').style.width = '1.8%';
-  }, 600);
 
   // ─── SCROLL ANIMATIONS ──────────────────────────────────────────────────────
   const observer = new IntersectionObserver(entries => {
