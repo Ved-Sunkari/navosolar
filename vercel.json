@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    {
+      "source": "/pitch",
+      "destination": "/pitch.html",
+      "permanent": false
+    },
+    {
+      "source": "/:path((?!.*\\.).*)",
+      "destination": "/",
+      "permanent": false
+    }
+  ]
+}
